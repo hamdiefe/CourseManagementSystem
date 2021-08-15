@@ -1,0 +1,174 @@
+﻿@using CourseManagementSystem.Web.Models.Events
+@using CourseManagementSystem.Web.Models.Common.Modals
+@using CourseManagementSystem.Models.Events 
+
+@model CreateOrEditEventModalViewModel
+@{
+    var selectListStudent = new SelectList(Model.EventStudentList, "Id", "DisplayName",(Model.IsEditMode ? Model.Event.StudentId.ToString() : ""));
+
+    var selectListTeacher = new SelectList(Model.EventTeacherList, "Id", "DisplayName", (Model.IsEditMode ? Model.Event.TeacherId.ToString() : ""));
+
+    var selectListStatus = Html.GetEnumSelectList(typeof(EventStatus));
+    foreach (var selectOption in selectListStatus) { selectOption.Text = L("Enum_EventStatus_" + selectOption.Value); }
+}
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditEvent")) : L("CreateNewEvent")))
+
+<div class="modal-body">
+    <ul class="js-tabs-to-dropdown nav nav-segment nav-fill nav-lg-down-break mb-5" id="CreateOrEditEventModalTab" role="tablist"
+        data-hs-transform-tabs-to-btn-options='{
+                  "transformResolution": "lg",
+                  "btnClassNames": "btn btn-block btn-white dropdown-toggle justify-content-center mb-3"
+                }'>
+        <li class="nav-item">
+            <a class="nav-link active" id="general-section-tab" data-toggle="tab" href="#general-section" role="tab">
+                <i class="tio-user-outlined mr-1"></i> @L("GeneralInformations")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="date-section-tab" data-toggle="tab" href="#date-section" role="tab">
+                <i class="tio-lock-outlined mr-1"></i> @L("Date")
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="CreateOrEditEventModalTabContent">
+        <div class="tab-pane fade show active" id="general-section" role="tabpanel" aria-labelledby="general-section-tab">
+            <form>
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" id="Event_Id" value="@Model.Event.Id" />}
+                <div class="row form-group">
+                    <label for="Event_Title" class="col-sm-3 col-form-label input-label">@L("Title")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="title" id="Event_Title"
+                                   value="@Model.Event.Title"
+                                   maxlength="@CourseManagementSystem.Models.Events.EventConsts.MaxTitleLength" minlength="@CourseManagementSystem.Models.Events.EventConsts.MinTitleLength"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Event_Description" class="col-sm-3 col-form-label input-label">@L("Description")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <textarea type="text" class="form-control" name="description" id="Event_Description"
+                                      maxlength="@CourseManagementSystem.Models.Events.EventConsts.MaxDescriptionLength"
+                                      minlength="@CourseManagementSystem.Models.Events.EventConsts.MinDescriptionLength">@Model.Event.Description</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Event_StudentId" class="col-sm-3 col-form-label input-label">@L("Student")</label>
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                    id="Event_StudentId" name="studentId" asp-for="@Model.Event.StudentId" asp-items="@selectListStudent"
+                                    data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                                <option value="">@L("NonSelected") </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Event_TeacherId" class="col-sm-3 col-form-label input-label">@L("Teacher")</label>
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                    id="Event_TeacherId" name="teacherId" asp-for="@Model.Event.TeacherId" asp-items="@selectListTeacher"
+                                    data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                                <option value="">@L("NonSelected") </option>
+                            </select>
+
+                        </div>
+                    </div>
+                </div>
+                @if (Model.IsEditMode)
+                {
+                    <div class="row form-group">
+                        <label for="Event_Status" class="col-sm-3 col-form-label input-label">@L("Status")</label>
+                        <div class="col-sm-9">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                        id="Event_Status" name="status" asp-for="@Model.Event.Status" asp-items="@selectListStatus"
+                                        data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+        <div class="tab-pane fade" id="date-section" role="tabpanel" aria-labelledby="date-section-tab">
+            <form>
+                <div class="date-container">
+                    <div class="startDateDiv">
+                        <div class="row form-group">
+                            <label class="col-sm-3 col-form-label input-label">@L("Date")</label>
+                            <div class="col-sm-9">
+                                @if (Model.IsEditMode)
+                                {
+                                    <small class="form-text">@L("StartDate")</small>
+                                }
+                                else
+                                {
+                                    <small class="form-text" style="display:none;">@L("StartDate")</small>
+                                }
+                                <div class="row js-form-message input-group input-group-sm-down-break align-items-center" style="margin: 0px !important;">
+                                    <div id="Event_StartDate" class="js-flatpickr flatpickr-custom input-group input-group-merge"
+                                         data-hs-flatpickr-options='{
+                              "appendTo": "#Event_StartDate",
+                              "dateFormat": "d/m/Y H:i",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")",
+                              "enableTime": true,
+                              "time_24hr": true}'>
+                                        <input type="text" class="flatpickr-custom-form-control form-control"
+                                               id="Event_StartDate" name="startDate" data-input value="@Model.Event.StartDate" placeholder="@L("StartDate")">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="endDateDiv">
+                        @if (Model.IsEditMode)
+                        {
+                            <input type="hidden" name="selectedEndDate" value="@Model.Event.EndDate" />
+                        }
+                    </div>
+                    @if (Model.IsEditMode != true)
+                    {
+                        <hr class="weekCountHr" style="display:none;">
+                        <div class="row form-group weekCountDiv" style="display:none;">
+                            <label for="Event_WeekRepeat" class="col-sm-3 col-form-label input-label">@L("RepeatWeekCount")</label>
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break">
+                                    <input type="number" class="form-control" name="weekRepeat" id="Event_WeekRepeat" max="10" value="0">
+                                </div>
+                                <small class="form-text">@L("RepeatWeekCountDescription")</small>
+
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/view-resources/Views/Events/_CreateOrEditModal.js" asp-append-version="true"></script>

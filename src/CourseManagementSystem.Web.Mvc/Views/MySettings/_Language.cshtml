@@ -1,0 +1,44 @@
+﻿@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@model RightNavbarLanguageSwitchViewModel
+<div id="LanguageSection" class="card mb-3 mb-lg-5">
+    <div class="card-header">
+        <h4 class="card-title">@L("Language")</h4>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+        <!-- Form Group -->
+        <div class="row form-group">
+            <label for="languageLabel" class="col-sm-3 col-form-label input-label">@L("Language")</label>
+
+            <div class="col-sm-9">
+                <li class="nav-item dropdown" style="        border: 1px solid rgb(231, 234, 243);
+        border-radius: 5px;
+        list-style-type: none;
+">
+                    <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" role="button">
+                        <img class="avatar avatar-xss avatar-circle mr-2" src="~/front-admin/assets/vendor/flag-icon-css/flags/1x1/@Model.CurrentLanguage.Icon" alt="@Model.CurrentLanguage.DisplayName">
+                        <span class="d-none d-md-inline-block">@Model.CurrentLanguage.DisplayName</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu p-0" style="width: 100%;border: 1px solid rgb(231, 234, 243);border-radius: 5px;">
+                        @foreach (var languageInfo in Model.Languages)
+                        {
+                            if (languageInfo.Name != Model.CurrentLanguage.Name)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("ChangeCulture", "AbpLocalization", new {
+                                                  cultureName = languageInfo.Name,
+                                                  returnUrl = Context.Request.Path + Context.Request.QueryString
+                                              })" style="padding: .5rem .75rem;">
+                                    <img class="avatar avatar-xss avatar-circle mr-2" src="~/front-admin/assets/vendor/flag-icon-css/flags/1x1/@languageInfo.Icon" alt="@languageInfo.DisplayName">@languageInfo.DisplayName
+                                </a>
+                            }
+                        }
+                    </div>
+                </li>
+
+            </div>
+        </div>
+        <!-- End Form Group -->
+    </div>
+    <!-- End Body -->
+</div>

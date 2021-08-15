@@ -1,0 +1,291 @@
+﻿@using CourseManagementSystem.Web.Startup
+@using CourseManagementSystem.Web.Models.Events
+@model EventsViewModel
+@{ ViewBag.Title = L("Events");
+    ViewBag.CurrentPageName = PageNames.Events; }
+@section scripts
+{
+    <script src="~/view-resources/Views/Events/Index.js" asp-append-version="true"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js" asp-append-version="true"></script>
+    <script src="~/front-admin/assets/vendor/select2-localization/tr.min.js"></script>
+}
+@section styles
+{
+
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row align-items-center mb-3">
+        <div class="col-sm">
+            <h1 class="page-header-title">@L("Events") <span class="badge badge-soft-dark ml-2 infoTotalQty"></span></h1>
+        </div>
+        <div class="col-sm-auto">
+            <a class="btn btn-primary" id="CreateNewEventButton" href="javascript:;" data-toggle="modal" data-target="#CreateOrEditModal">@L("CreateNewEvent")</a>
+            <a id="EditEventButton" href="javascript:;" data-toggle="modal" data-target="#CreateOrEditModal"></a>
+        </div>
+    </div>
+    <!-- End Row -->
+</div>
+<!-- End Page Header -->
+<!-- Card -->
+<div class="card">
+    <!-- Header -->
+    <div class="card-header">
+        <div class="row justify-content-between align-items-center flex-grow-1">
+            <div class="col-lg-6 mb-3 mb-lg-0">
+                <!-- Search -->
+                <div class="input-group input-group-merge input-group-flush">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <i class="tio-search"></i>
+                        </div>
+                    </div>
+                    <input id="datatableSearch" name="filter" type="search" class="form-control" placeholder="@L("SearchWithThreeDot")" aria-label="@L("SearchWithThreeDot")">
+                </div>
+                <!-- End Search -->
+            </div>
+
+            <div class="col-lg-6">
+                <div class="d-sm-flex justify-content-sm-end align-items-sm-center">
+                    <!-- Datatable Info -->
+                    <div id="datatableCounterInfo" class="mr-2 mb-2 mb-sm-0" style="display: none;">
+                        <div class="d-flex align-items-center">
+                            <span class="font-size-sm mr-3">
+                                <span id="datatableCounter">0</span>
+                                @L("RowSelected")
+                            </span>
+                            <a id="DeleteSelectedAllButton" class="btn btn-sm btn-outline-danger" href="javascript:;">
+                                <i class="tio-delete-outlined"></i> @L("Delete")
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Datatable Info -->
+                    <!-- Unfold -->
+                    <div class="hs-unfold mr-2">
+                        <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle" href="javascript:;"
+                           data-hs-unfold-options='{
+                         "target": "#usersExportDropdown",
+                         "type": "css-animation"
+                       }'>
+                            <i class="tio-download-to mr-1"></i> @L("Export")
+                        </a>
+
+                        <div id="usersExportDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
+                            <span class="dropdown-header">@L("Options")</span>
+                            <a id="export-copy" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/illustrations/copy.svg" alt="@L("Copy")">
+                                @L("Copy")
+                            </a>
+                            <a id="export-print" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/illustrations/print.svg" alt="@L("Print")">
+                                @L("Print")
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <span class="dropdown-header">@L("DownloadOptions")</span>
+                            <a id="export-excel" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/brands/excel.svg" alt="@L("Excel")">
+                                Excel
+                            </a>
+                            <a id="export-csv" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/components/placeholder-csv-format.svg" alt="@L(".CSV")">
+                                .CSV
+                            </a>
+                            <a id="export-pdf" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/brands/pdf.svg" alt="@L("PDF")">
+                                PDF
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Unfold -->
+                    <!-- Unfold -->
+                    <div class="hs-unfold">
+                        <a class="js-hs-unfold-invoker btn btn-sm btn-white" href="javascript:;"
+                           data-hs-unfold-options='{
+                         "target": "#showHideDropdown",
+                         "type": "css-animation"
+                       }'>
+                            <i class="tio-table mr-1"></i> @L("Columns") <span class="badge badge-soft-dark rounded-circle ml-1">8</span>
+                        </a>
+
+                        <div id="showHideDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right dropdown-card" style="width: 15rem;">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("Title")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_title">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_title" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("Description")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_description">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_description" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("Student")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_student">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_student" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("Teacher")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_teacher">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_teacher" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("StartDate")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_startDate">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_startDate" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("EndDate")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_endDate">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_endDate" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("TotalHours")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_totalHours">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_totalHours" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("Type")</span>
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_type">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_type" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Unfold -->
+                </div>
+            </div>
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Header -->
+    <!-- Table -->
+    <div class="table-responsive datatable-custom">
+        <table id="datatable" class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table" style="width: 100%"
+               data-hs-datatables-options='{
+                     "columnDefs": [{
+                        "targets": [0],
+                        "orderable": false
+                      }],
+                     "order": [],
+                     "info": {
+                       "totalQty": ".infoTotalQty"
+                     },
+                     "search": "#datatableSearch",
+                     "entries": "#datatableEntries",
+                     "pageLength": 10,
+                     "isResponsive": false,
+                     "isShowPaging": false,
+                     "pagination": "datatablePagination"
+                   }'>
+            <thead class="thead-light">
+                <tr>
+                    @*<th scope="col" class="table-column-pr-0">
+                            <div class="custom-control custom-checkbox">
+                                <input id="datatableCheckAll" type="checkbox" class="custom-control-input">
+                                <label class="custom-control-label" for="datatableCheckAll"></label>
+                            </div>
+                        </th>*@
+                    <th>@L("Title")</th>
+                    <th>@L("Description")</th>
+                    <th>@L("Student")</th>
+                    <th>@L("Teacher")</th>
+                    <th>@L("StartDate")</th>
+                    <th>@L("EndDate")</th>
+                    <th>@L("TotalHours")</th>
+                    <th>@L("Type")</th>
+                    <th>@L("Status")</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- End Table -->
+    <!-- Footer -->
+    <div class="card-footer">
+        <!-- Pagination -->
+        <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+            <div class="col-sm mb-2 mb-sm-0">
+                <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                    <span class="mr-2">@L("Showing"):</span>
+
+                    <!-- Select -->
+                    <select id="datatableEntries" class="js-select2-custom"
+                            data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "customClass": "custom-select custom-select-sm custom-select-borderless",
+                            "dropdownAutoWidth": true,
+                            "width": true
+                          }'>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <!-- End Select -->
+
+                    <span class="text-secondary mr-2">/</span>
+
+                    <!-- Pagination Quantity -->
+                    <span class="infoTotalQty"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto">
+                <div class="d-flex justify-content-center justify-content-sm-end">
+                    <!-- Pagination -->
+                    <nav id="datatablePagination"></nav>
+                </div>
+            </div>
+        </div>
+        <!-- End Pagination -->
+    </div>
+    <!-- End Footer -->
+</div>
+<!-- End Card -->
+
+<div class="modal fade" id="CreateOrEditModal" tabindex="-1" role="dialog" aria-labelledby="createOrEditTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>

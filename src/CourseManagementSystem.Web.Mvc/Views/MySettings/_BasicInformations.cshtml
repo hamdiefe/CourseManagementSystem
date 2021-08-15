@@ -1,0 +1,61 @@
+﻿@using CourseManagementSystem.Services.MySettings.Dtos
+@model BasicInformationsDto
+
+<div class="card mb-3 mb-lg-5">
+    <div class="card-header">
+        <h2 class="card-title h4">@L("BasicInformations")</h2>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+        <!-- Form -->
+        <form id="BasicInformationsForm">
+            <!-- Form Group -->
+            <div class="row form-group">
+                <label for="UserName" class="col-sm-3 col-form-label input-label">@L("UserName")</label>
+
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm-down-break">
+                        <input type="text" class="form-control" name="userName" id="UserName" disabled value="@Model.UserName">
+                    </div>
+                </div>
+            </div>
+            <!-- Form Group -->
+            <div class="row form-group">
+                <label for="Name" class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm-down-break">
+                        <input type="text" class="form-control" name="name" id="Name" value="@Model.Name">
+                    </div>
+                </div>
+            </div>
+            <!-- Form Group -->
+            <div class="row form-group">
+                <label for="Surname" class="col-sm-3 col-form-label input-label">@L("Surname")</label>
+
+                <div class="col-sm-9">
+                    <div class="input-group input-group-sm-down-break">
+                        <input type="text" class="form-control" name="surname" id="Surname" value="@Model.Surname">
+                    </div>
+                </div>
+            </div>
+            <!-- End Form Group -->
+            <!-- Form Group -->
+            <div class="row form-group">
+                <label for="Email" class="col-sm-3 col-form-label input-label">@L("Email")</label>
+
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" name="Email" id="Email" disabled value="@Model.Email">
+                </div>
+            </div>
+            <!-- End Form Group -->           
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">@L("Save")</button>
+            </div>
+        </form>
+        <!-- End Form -->
+    </div>
+    <!-- End Body -->
+</div>

@@ -1,0 +1,109 @@
+﻿@using CourseManagementSystem.Web.Models.AuditLogs
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model AuditLogViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewAuditLog")))
+
+<div class="modal-body">
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("IpAddress")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.AuditLog.ClientIpAddress"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("User")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.UserName"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("ExecutionDuration")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.AuditLog.ExecutionDuration"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("ExecutionTime")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.AuditLog.ExecutionTime"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("Service")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.AuditLog.ServiceName"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("Method")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.AuditLog.MethodName"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("Parameters")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control"
+                       value="@Model.AuditLog.Parameters"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("Browser")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <textarea type="text" class="form-control"
+                          readonly>@Model.AuditLog.BrowserInfo</textarea>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("Exception")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <textarea type="text" class="form-control" rows="10"
+                          readonly>@Model.AuditLog.Exception</textarea>
+            </div>
+        </div>
+    </div>
+
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithClose.cshtml")
+</div>

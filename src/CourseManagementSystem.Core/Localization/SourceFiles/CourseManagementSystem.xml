@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+	<texts>
+    <text name="Status" value="Status" />
+    <text name="Enum_EventStatus_2" value="NotCompleted" />
+    <text name="Enum_EventStatus_1" value="Completed" />
+    <text name="Enum_EventStatus_0" value="Nonselected" />
+    <text name="RepeatWeekCountDescription" value="The event will be held over and over for as many weeks as you write here."></text>
+    <text name="RepeatWeekCount" value="Repeat week count"></text>
+    <text name="RefreshPayments" value="Refresh Payments" />
+
+    <text name="Enum_DocumentType_2" value="Bank Wire" />
+    <text name="Enum_DocumentType_1" value="Service Invoice" />
+    <text name="Enum_DocumentType_0" value="Cash Payment" />
+    <text name="Currency" value="Currency" />
+    <text name="DocumentSerie" value="Document Serie" />
+    <text name="DocumentNo" value="Document No" />
+    <text name="Debt" value="Debt" />
+    <text name="Credit" value="Credit" />
+    <text name="Remaining" value="Remaining" />
+    
+    <text name="ViewDocument" value="View Document" />
+    <text name="EditDocument" value="Edit Document" />
+    <text name="CreateNewDocument" value="Create New Document" />
+    <text name="Document">Document</text>
+    <text name="Documents">Documents</text>
+    <text name="Accounting">Accounting</text>
+
+    <text name="TotalHours" value="Total Hours" />
+    <text name="Type" value="Type" />
+    <text name="Enum_EventType_1" value="Payment" />
+    <text name="Enum_EventType_0" value="Class" />
+    <text name="SaveProfileImage" value="Save Profile Image" />
+    <text name="Location" value="Location" />
+    <text name="EnsureThatTheseRequirementsAreMet" value="Ensure that these requirements are met" />
+    <text name="MinimumEightCharactersLong" value="Minimum 8 characters long" />
+    <text name="AtLeastOneLowercaseCharacter" value="At least one lowercase character" />
+    <text name="AtLeastOneUppercaseCharacter" value="At least one uppercase character" />
+    <text name="AtLeastOneNumberCharacter" value="At least one lowercase character" />
+    <text name="PasswordRequirements" value="Password Requirements" />
+    <text name="Languages" value="Languages" />
+    <text name="Language" value="Language" />
+    <text name="DeleteYourAccount" value="Delete Your Account" />
+    <text name="DeleteYourAccountDescription" value="Please contact the system administrator to delete your account." />
+    <text name="RecentUserLogins" value="Recent User Logins" />s
+    <text name="BasicInformations" value="Basic Informations" />
+    <text name="ProfileImageSaved" value="Profile image saved successfully" />
+    <text name="BasicInformationsSaved" value="Basic informations saved successfully" />
+    <text name="PasswordSaved" value="Password saved successfully" />
+    <text name="MySettings" value="MySettings" />
+    <text name="Browser" value="Browser" />
+    <text name="IpAddress" value="Ip Address" />
+    <text name="Exception" value="Exception" />
+    <text name="Parameters" value="Parameters" />
+    <text name="Method" value="Method" />
+    <text name="Service" value="Service" />
+    <text name="ExecutionTime" value="Execution Time" />
+    <text name="ExecutionDuration" value="Execution Duration" />
+    <text name="User" value="User" />
+    <text name="ViewAuditLog" value="View Audit Log" />
+    <text name="AuditLogs" value="Audit Logs" />
+    
+    <text name="Disabled">Disabled</text>
+    <text name="Container">Container</text>
+    <text name="DoubleLine">Double Line</text>
+    <text name="Fluid">Fluid</text>
+    <text name="Mini">Mini</text>
+    <text name="Compact">Compact</text>
+    <text name="Default">Default</text>
+    <text name="Dark">Dark</text>
+    <text name="Light">Light</text>
+    <text name="Skin">Skin</text>
+    <text name="Skins">Skins</text>
+    <text name="Header">Header</text>
+    <text name="Sidebar">Sidebar</text>
+    <text name="CustomizePageLayout">Customize page layout.</text>
+    <text name="Reset">Reset</text>
+    <text name="Apply">Apply</text>
+    <text name="ForgotPassword">Forgot Password</text>
+    <text name="Definitions" value="Definitions" />
+    <text name="hour" value="hour" />
+    <text name="Hour" value="Hour" />
+    <text name="EventTypes" value="Event Types" />
+    <text name="Payment" value="Payment" />
+    <text name="Class" value="Class" />
+    <text name="Filter" value="Filter" />
+    <text name="HourlyPaymentPeriod" value="Hourly Payment Period" />
+    <text name="HourlyPaymentAmount" value="Hourl Payment Amount" />
+    <text name="Enum_Currency_0" value="TRY" />
+    <text name="Active" value="Active" />
+    
+    <text name="Next" value="Next" />
+    <text name="Previous" value="Previous" />
+    <text name="Month" value="Month" />
+    <text name="Week" value="Week" />
+    <text name="Day" value="Day" />
+    <text name="List" value="List" />
+    <text name="SearchByTitle" value="Search by title" />
+    <text name="Today" value="Today" />
+
+    <text name="With" value="with" />
+    <text name="Between" value="between" />
+    <text name="AtLeastOneDateMustBeEntered" value="At least one date must be entered." />
+
+    <text name="ViewEvent" value="View Event" />
+    <text name="EditEvent" value="Edit Event" />    
+    <text name="CreateNewEvent" value="Create New Event" />
+    <text name="Event" value="Event" />
+    <text name="Events" value="Events" />
+    
+    <text name="AddDate" value="Add Date" />
+    <text name="EndDate" value="End Date" />
+    <text name="StartDate" value="Start Date" />
+    <text name="Date" value="Date" />
+    <text name="Title" value="Title" />
+    <text name="Calendar" value="Calendar" />
+
+    <text name="Enum_SpecializedField_5" value="English" />
+    <text name="Enum_SpecializedField_4" value="Science" />
+    <text name="Enum_SpecializedField_3" value="Social" />
+    <text name="Enum_SpecializedField_2" value="Maths" />
+    <text name="Enum_SpecializedField_1" value="Turkish" />
+    <text name="Enum_SpecializedField_0" value="Nonselected" />
+    
+    <text name="AddSpecializedField" value="Add Specialized Field" />
+    <text name="SpecializedField" value="Specialized Field" />
+    <text name="GraduationSchool" value="Graduation School" />
+
+    <text name="ViewTeacher" value="View Teacher" />
+    <text name="EditTeacher" value="Edit Parent" />
+    <text name="CreateNewTeacher" value="Create New Teacher" />
+    <text name="Teacher" value="Teacher" />
+    <text name="Teachers" value="Teachers" />
+    
+    <text name="AddParent" value="Add Parent" />
+
+    <text name="Enum_EducationalStatus_7" value="Doctors Degree" />
+    <text name="Enum_EducationalStatus_6" value="Master Degree" />
+    <text name="Enum_EducationalStatus_5" value="Bachelors Degree" />
+    <text name="Enum_EducationalStatus_4" value="Associate Degree" />
+    <text name="Enum_EducationalStatus_3" value="High School Degree" />
+    <text name="Enum_EducationalStatus_2" value="Middle School Degree" />
+    <text name="Enum_EducationalStatus_1" value="Primary School Degree" />
+    <text name="Enum_EducationalStatus_0" value="Nonselected" />
+    <text name="EducationalStatus" value="Educational Status" />
+
+    <text name="Enum_ParentDegree_3" value="Other" />
+    <text name="Enum_ParentDegree_2" value="Third Degree" />
+    <text name="Enum_ParentDegree_1" value="Second Degree" />
+    <text name="Enum_ParentDegree_0" value="First Degree" />
+    <text name="ParentDegree" value="Parent Degree" />
+    <text name="ViewParentType" value="View Parent Type" />
+    <text name="EditParentType" value="Edit Parent Type" />
+    <text name="CreateNewParentType" value="Create New Parent Type" />
+    <text name="ParentType" value="Parent Type" />
+    <text name="ParentTypes" value="Parent Types" />
+    
+    <text name="Description">Description</text>
+
+    <text name="ViewParent" value="View Parent" />
+    <text name="EditParent" value="Edit Parent" />
+    <text name="CreateNewParent" value="Create New Parent" />
+    <text name="Parent" value="Parent" />
+    <text name="Parents" value="Parents" />
+
+    <text name="ViewJob" value="View Job" />
+    <text name="EditJob" value="Edit Job " />
+    <text name="CreateNewJob" value="Create New Job" />
+    <text name="Job">Job</text>
+    <text name="Jobs">Jobs</text>
+    
+    <text name="ThisFieldRequired">This field is required.</text>
+    <text name="CheckThe{0}">Check the {0} field.</text>
+    <text name="{0}IsRequired">{0} is required.</text>
+
+    <text name="Enum_AddressType_1" value="Work" />
+		<text name="Enum_AddressType_0" value="Home" />
+		<text name="AddressContinue" value="Address Continue" />
+		<text name="Address" value="Address" />
+		<text name="AddAddress" value="Add Address" />
+
+		<text name="GeneralInformations" value="General" />
+		<text name="IdentityNumberCouldNotVerify" value="Identity Number Could Not Verify" />
+
+		<text name="Enum_PhoneType_3" value="Fax" />
+		<text name="Enum_PhoneType_2" value="Work" />
+		<text name="Enum_PhoneType_1" value="Home" />
+		<text name="Enum_PhoneType_0" value="Mobile" />
+		<text name="Phone" value="Phone" />
+		<text name="AddPhone" value="Add Phone" />
+		
+		<text name="NonSelected" value="Non Selected" />
+		<text name="PickTown" value="Pick Town" />
+		<text name="PickCity" value="Pick City" />
+		<text name="PickCountry" value="Pick Country" />
+		<text name="Pick" value="Pick" />
+		<text name="Age" value="Age" />
+		<text name="LibraryLocale" value="en" />
+
+		<text name="Enum_Gender_2" value="Female" />
+		<text name="Enum_Gender_1" value="Male" />
+		<text name="Enum_Gender_0" value="Nonselected" />
+		
+		<text name="StudentNumber" value="Student Number" />
+		<text name="BirthPlace" value="Birth Place" />
+		<text name="Email" value="E-mail" />
+		<text name="BirthDate" value="Birth Date" />
+		<text name="Gender" value="Gender" />
+		<text name="IdentityNumber" value="Identity Number" />
+
+		<text name="ViewStudent" value="View Student" />
+		<text name="EditStudent" value="Edit Student" />
+		<text name="CreateNewStudent" value="Create New Student" />
+		<text name="Student" value="Student" />
+		<text name="Students" value="Students" />
+		
+		<text name="Enum_SchoolType_5" value="University" />
+		<text name="Enum_SchoolType_4" value="High School" />
+		<text name="Enum_SchoolType_3" value="Middle School" />
+		<text name="Enum_SchoolType_2" value="Primary School" />
+		<text name="Enum_SchoolType_1" value="Kindergarten School" />
+		<text name="Enum_SchoolType_0" value="Nonselected" />
+		<text name="SchoolType" value="School Type" />
+		<text name="SchoolName" value="School Name" />
+		<text name="ViewSchool" value="View School" />
+		<text name="EditSchool" value="Edit School" />
+		<text name="CreateNewSchool" value="Create New School" />
+		<text name="School" value="School" />
+		<text name="Schools" value="Schools" />
+		
+		<text name="GradeName" value="Grade Name" />
+		<text name="ViewGrade" value="View Grade" />
+		<text name="EditGrade" value="Edit Grade" />
+		<text name="CreateNewGrade" value="Create New Grade" />
+		<text name="Grade" value="Grade" />
+		<text name="Grades" value="Grades" />
+		
+		<text name="Export" value="Export" />
+		<text name="View" value="View" />
+		<text name="Close" value="Close" />
+		<text name="NoDataToShow" value="No Data To Show" />
+		<text name="Appearance" value="Appearance" />
+		<text name="Showing" value="Showing" />
+		<text name="RowSelected" value="Row Selected" />
+		<text name="Copy" value="Copy" />
+		<text name="Print" value="Print" />
+		<text name="Download" value="Download" />
+		<text name="Options" value="Options" />
+		<text name="DownloadOptions" value="Download Options" />
+		<text name="Columns" value="Columns" />
+		<text name="CreateNewRole" value="Create New Role" />
+		<text name="HomePage" value="Home page" />
+		<text name="About" value="About" />
+		<text name="WelcomeMessage" value="Welcome to CourseManagementSystem!" />
+		<text name="FormIsNotValidMessage" value="Form is not valid. Please check and fix errors." />
+		<text name="TenantNameCanNotBeEmpty" value="Tenant name can not be empty" />
+		<text name="InvalidUserNameOrPassword" value="Invalid user name or password" />
+		<text name="ThereIsNoTenantDefinedWithName{0}" value="There is no tenant defined with name {0}" />
+		<text name="TenantIsNotActive" value="Tenant {0} is not active." />
+		<text name="UserIsNotActiveAndCanNotLogin" value="User {0} is not active and can not log in." />
+		<text name="UserEmailIsNotConfirmedAndCanNotLogin">Your email address is not confirmed. You can not login.</text>
+		<text name="UserLockedOutMessage">The user account has been locked out. Please try again later.</text>
+		<text name="PleaseEnterLoginInformation" value="Please enter login information" />
+		<text name="TenancyName" value="Tenancy name" />
+		<text name="UserNameOrEmail" value="User name or email" />
+		<text name="Password" value="Password" />
+		<text name="ResetPassword" value="Reset Password" />
+		<text name="UpdatePassword" value="Update Password" />
+		<text name="RememberMe" value="Remember me" />
+		<text name="LogIn" value="Log in" />
+		<text name="LoginFailed" value="Login failed!" />
+		<text name="NameSurname" value="Name surname" />
+		<text name="UserName" value="User name" />
+		<text name="Name" value="Name" />
+		<text name="Surname" value="Surname" />
+		<text name="EmailAddress" value="Email address" />
+		<text name="Tenants" value="Tenants" />
+		<text name="SavedSuccessfully" value="Saved successfully" />
+		<text name="CreateNewTenant" value="Create new tenant" />
+		<text name="AdminEmailAddress" value="Admin email address" />
+		<text name="AdminPassword" value="Admin password" />
+		<text name="Save" value="Save" />
+		<text name="Cancel" value="Cancel" />
+		<text name="TenantName_Regex_Description" value="Tenant name must be at least 2 chars, starts with a letter and continue with letter, number, dash or underscore." />
+		<text name="DefaultPasswordIs" value="Default password is {0}" />
+		<text name="CanBeEmptyToLoginAsHost" value="Can be empty to login as host." />
+		<text name="Register" value="Register" />
+		<text name="OrLoginWith" value="Or login with" />
+		<text name="WaitingForActivationMessage" value="Your account is waiting to be activated by system admin." />
+		<text name="TenantSelection" value="Tenant Selection" />
+		<text name="TenantSelection_Detail" value="Please select one of the following tenants." />
+		<text name="Logout" value="Logout" />
+		<text name="RegisterFormUserNameInvalidMessage">Please don't enter an email address for username.</text>
+		<text name="DatabaseConnectionString" value="Database connection string" />
+		<text name="Users" value="Users" />
+		<text name="IsActive" value="Is active" />
+		<text name="FullName" value="Full name" />
+		<text name="CreateNewUser" value="Create new user" />
+		<text name="Yes" value="Yes" />
+		<text name="No" value="No" />
+		<text name="Optional" value="Optional" />
+		<text name="LeaveEmptyToSwitchToHost">Leave empty to switch to the host</text>
+		<text name="CurrentTenant">Current tenant</text>
+		<text name="NotSelected">Not selected</text>
+		<text name="Change">Change</text>
+		<text name="ChangeTenant">Change tenant</text>
+		<text name="MultiLevelMenu">Multi Level Menu</text>
+		<text name="Back">Back</text>
+		<text name="SuccessfullyRegistered">Successfully registered</text>
+		<text name="WaitingForEmailActivation">Your email address should be activated</text>
+		<text name="Roles">Roles</text>
+		<text name="DisplayName">Display Name</text>
+		<text name="Edit">Edit</text>
+		<text name="Delete">Delete</text>
+		<text name="RoleName">Role Name</text>
+		<text name="Actions">Actions</text>
+		<text name="CouldNotCompleteLoginOperation">Could not complete login operation. Please try again later.</text>
+		<text name="CouldNotValidateExternalUser">Could not validate external user</text>
+		<text name="EditRole">Edit role</text>
+		<text name="EditTenant">Edit tenant</text>
+		<text name="EditUser">Edit user</text>
+		<text name="TenantIdIsNotActive{0}">TenantId {0} is not active</text>
+		<text name="UnknownTenantId{0}">Unknown tenantId {0}</text>
+		<text name="ThisFieldIsRequired">This field is required</text>
+		<text name="PleaseWait">Please wait...</text>
+		<text name="Administration">Administration</text>
+		<text name="ClearAll">Clear all</text>
+		<text name="ClearOthers">Clear others</text>
+		<text name="LabelOptions">Label options</text>
+		<text name="Permissions">Permissions</text>
+		<text name="RoleDescription">Role description</text>
+		<text name="Refresh">Refresh</text>
+		<text name="Create">Create</text>
+		<text name="UserDetails">User details</text>
+		<text name="UserRoles">User roles</text>
+		<text name="ConfirmPassword">Confirm password</text>
+		<text name="Version">Version</text>
+		<text name="On">On</text>
+		<text name="Off">Off</text>
+		<text name="AreYouSureWantToDeleteSelectedAll">Are you sure want to delete selected all?</text>
+		<text name="AreYouSureWantToDelete">Are you sure want to delete {0}?</text>
+		<text name="SuccessfullyDeleted">Successfully deleted</text>
+		<text name="StartTyping">Start Typing</text>
+		<text name="Settings">Settings</text>
+		<text name="CurrentPassword">Current Password</text>
+		<text name="NewPassword">New Password</text>
+		<text name="ConfirmNewPassword">Confirm New Password</text>
+		<text name="PasswordsDoNotMatch">Passwords do not match</text>
+		<text name="PasswordsMustBeAtLeast8CharactersContainLowercaseUppercaseNumber">Passwords must be at least 8 characters, contain a lowercase, uppercase, and number</text>
+		<text name="UserDeleteWarningMessage">User {0} will be deleted.</text>
+		<text name="RoleDeleteWarningMessage">Role {0} will be deleted and unassigned from all assigned users.</text>
+		<text name="TenantDeleteWarningMessage">Tenant {0} will be deleted.</text>
+		<text name="SearchWithThreeDot">Search...</text>
+		<text name="PleaseEnterAtLeastNCharacter">Please enter at least {0} characters</text>
+		<text name="PleaseEnterNoMoreThanNCharacter">Please enter no more than {0} characters</text>
+		<text name="InvalidEmailAddress">Invalid email address</text>
+		<text name="InvalidPattern">Invalid</text>
+		<text name="PairsDoNotMatch">Do not match</text>
+		<text name="All">All</text>
+		<text name="TotalRecordsCount">Total: {0}</text>
+		<text name="Search">Search</text>
+		<text name="Clear">Clear</text>
+		<text name="ResetPasswordStepOneInfo">1. Enter your administrator password</text>
+		<text name="ResetPasswordStepTwoInfo">2. Copy this random password so you can send it to the user</text>
+	</texts>
+</localizationDictionary>

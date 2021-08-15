@@ -1,0 +1,26 @@
+﻿@*@using CourseManagementSystem.Web.Models.Students
+@using CourseManagementSystem.Models.Parents
+@model AddStudentParentFieldViewModel
+
+@{
+    var selectListParent = new SelectList(Model.StudentParentList, "Id", "DisplayName");}
+
+
+<div class="parent-container">
+    <div class="row form-group">
+        <label for="Student_Parent" class="col-sm-3 col-form-label input-label">@L("Parent")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                        name="parent" asp-items="@selectListParent">
+                    <option value="">@L("NonSelected") </option>
+                </select>
+                <a class="js-delete-field js-delete-field input-group-add-field-delete delete-parent" style="opacity: 1" href="javascript:;">
+                    <i class="tio-clear"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/view-resources/Views/Students/_AddParentField.js" asp-append-version="true"></script>*@

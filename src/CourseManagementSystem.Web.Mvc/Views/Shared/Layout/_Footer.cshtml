@@ -1,0 +1,18 @@
+﻿@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+
+<div class="footer">
+    <div class="row justify-content-between align-items-center">
+        <div class="col">
+            <p class="font-size-sm mb-0">Yıldız Çocuklar Eğitim Kulübü &copy; <span class="d-sm-inline-block">@DateTime.Now.Year</span></p>
+        </div>
+        <div class="col-auto">
+            <div class="d-flex justify-content-end">
+                <!-- List Dot -->
+                <ul class="list-inline list-separator">
+                    @await Component.InvokeAsync(typeof(RightNavbarLanguageSwitchViewComponent))
+                </ul>
+                <!-- End List Dot -->
+            </div>
+        </div>
+    </div>
+</div>

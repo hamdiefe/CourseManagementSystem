@@ -1,0 +1,89 @@
+﻿@using Abp.Authorization.Users
+@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@model CourseManagementSystem.Web.Models.Account.LoginFormViewModel
+@{ ViewBag.Title = L("LogIn"); }
+@section styles{ 
+<style>
+    .login-color-white{
+        color:#fff;
+    }
+</style>
+}
+@section scripts
+{
+    <script src="~/view-resources/Views/Account/Login.js" asp-append-version="true"></script>
+}
+<div class="container-fluid px-3">
+    <div class="row">
+        <!-- Cover -->
+        <div style="background-image: url('/img/panel1.jpg'); background-repeat: no-repeat; background-size: cover;" class="col-lg-6 d-none d-lg-flex justify-content-center align-items-center min-vh-lg-100 position-relative bg-light px-0">
+            <!-- Logo & Language -->
+            <div class="position-absolute top-0 left-0 right-0 mt-3 mx-3">
+                <div class="d-none d-lg-flex justify-content-between">
+                    <a href="/">
+                        <img class="w-100" src="/front-admin/assets/svg/logos/logo.svg" style="min-width: 7rem; max-width: 14rem;">
+                    </a>
+                    @await Component.InvokeAsync(typeof(RightNavbarLanguageSwitchViewComponent))
+                </div>
+            </div>
+            <!-- End Logo & Language -->
+        </div>
+        <!-- End Cover -->
+
+        <div class="col-lg-6 d-flex justify-content-center align-items-center min-vh-lg-100">
+            <div class="w-100 pt-10 pt-lg-7 pb-7" style="max-width: 25rem;">
+                <!-- Form -->
+                <form class="js-validate" id="LoginForm" asp-action="Login" method="post">
+                    <div class="text-center mb-5">
+                        <h1 class="display-4">@L("LogIn")</h1>
+                    </div>
+                    <!-- Form Group -->
+                    <div class="js-form-message form-group">
+                        <label class="input-label" for="signupSrEmail">@L("UserNameOrEmail")</label>
+
+                        <input type="text" class="form-control form-control-lg" name="usernameOrEmailAddress" id="UsernameOrEmailAddress" required autofocus maxlength="@AbpUserBase.MaxEmailAddressLength">
+                    </div>
+                    <!-- End Form Group -->
+                    <!-- Form Group -->
+                    <div class="js-form-message form-group">
+                        <label class="input-label" for="signupSrPassword" tabindex="0">
+                            <span class="d-flex justify-content-between align-items-center">
+                                @L("Password")
+                                <a class="input-label-secondary" href="/">@L("ForgotPassword")</a>
+                            </span>
+                        </label>
+
+                        <div class="input-group input-group-merge">
+                            <input type="password" class="js-toggle-password form-control form-control-lg" name="password" id="Password" required
+                                   data-msg="Your password is invalid. Please try again."
+                                   data-hs-toggle-password-options='{
+                             "target": "#changePassTarget",
+                             "defaultClass": "tio-hidden-outlined",
+                             "showClass": "tio-visible-outlined",
+                             "classChangeTarget": "#changePassIcon"
+                           }'>
+                            <div id="changePassTarget" class="input-group-append">
+                                <a class="input-group-text" href="javascript:;">
+                                    <i id="changePassIcon" class="tio-visible-outlined"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Form Group -->
+                    <!-- Checkbox -->
+                    <div class="form-group">
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="termsCheckbox" name="termsCheckbox">
+                            <label class="custom-control-label text-muted" for="termsCheckbox">@L("RememberMe")</label>
+                        </div>
+                    </div>
+                    <!-- End Checkbox -->
+
+                    <button type="submit" class="btn btn-lg btn-block btn-primary">@L("LogIn")</button>
+                </form>
+                <!-- End Form -->
+            </div>
+        </div>
+    </div>
+    <!-- End Row -->
+</div>

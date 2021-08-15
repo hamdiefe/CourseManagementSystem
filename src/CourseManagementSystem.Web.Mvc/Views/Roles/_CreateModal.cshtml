@@ -1,0 +1,58 @@
+﻿@using CourseManagementSystem.Web.Models.Common.Modals
+@model CourseManagementSystem.Web.Models.Roles.RoleListViewModel
+@{ Layout = null; }
+
+<div class="modal fade" id="RoleCreateModal" tabindex="-1" role="dialog" aria-labelledby="RoleCreateModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewRole")))
+            <form name="roleCreateForm" role="form" class="form-horizontal">
+                <div class="modal-body">
+                    <div class="row form-group">
+                        <label for="RoleName" class="col-sm-3 col-form-label input-label">@L("RoleName")</label>
+
+                        <div class="col-sm-9">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <input id="RoleName" type="text" name="name" class="form-control" required maxlength="32" minlength="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="DisplayName" class="col-sm-3 col-form-label input-label">@L("DisplayName")</label>
+
+                        <div class="col-sm-9">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <input id="DisplayName" type="text" name="displayName" class="form-control" required maxlength="32" minlength="2">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="Description" class="col-sm-3 col-form-label input-label">@L("RoleDescription")</label>
+
+                        <div class="col-sm-9">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <textarea id="Description" type="text" name="description" class="form-control"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="Description" class="col-sm-3 col-form-label input-label">@L("Permissions")</label>
+
+                        <div class="col-sm-9">
+                            <div class="row">
+                                @foreach (var permission in Model.Permissions)
+                                {
+                    <div class="col-md-6">
+                        <input type="checkbox" name="permission" value="@permission.Name" id="permission-@permission.Name" checked="checked" />
+                        <label for="permission-@permission.Name">@permission.DisplayName</label>
+                    </div>}
+                            </div>
+
+                        </div>
+                    </div>
+                    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

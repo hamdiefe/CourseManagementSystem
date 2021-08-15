@@ -1,0 +1,123 @@
+﻿@using CourseManagementSystem.Web.Startup
+@using CourseManagementSystem.Web.Models.MySettings
+@model MySettingsViewModel
+
+@{ ViewBag.Title = L("MySettings");
+    ViewBag.CurrentPageName = PageNames.MySettings; }
+
+@section styles
+{
+
+}
+@section scripts
+{
+    <!-- JS Plugins Init. -->
+    <script src="~/view-resources/Views/MySettings/Index.js" asp-append-version="true"></script>
+    <script src="~/view-resources/Views/MySettings/_ProfileImage.js" asp-append-version="true"></script>
+    <script src="~/view-resources/Views/MySettings/_BasicInformations.js" asp-append-version="true"></script>
+    <script src="~/view-resources/Views/MySettings/_Password.js" asp-append-version="true"></script>
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row align-items-center mb-3">
+        <div class="col-sm">
+            <h1 class="page-header-title">@L("MySettings")</h1>
+        </div>
+    </div>
+    <!-- End Row -->
+</div>
+<!-- End Page Header -->
+
+<div class="row">
+    <div class="col-lg-3">
+        <!-- Navbar -->
+        <div class="navbar-vertical navbar-expand-lg mb-3 mb-lg-5">
+            <!-- Navbar Toggle -->
+            <button type="button" class="navbar-toggler btn btn-block btn-white mb-3" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarVerticalNavMenu" data-toggle="collapse" data-target="#navbarVerticalNavMenu">
+                <span class="d-flex justify-content-between align-items-center">
+                    <span class="h5 mb-0">Menu</span>
+
+                    <span class="navbar-toggle-default">
+                        <i class="tio-menu-hamburger"></i>
+                    </span>
+
+                    <span class="navbar-toggle-toggled">
+                        <i class="tio-clear"></i>
+                    </span>
+                </span>
+            </button>
+            <!-- End Navbar Toggle -->
+
+            <div id="navbarVerticalNavMenu" class="collapse navbar-collapse">
+                <!-- Navbar Nav -->
+                <ul id="navbarSettings" class="js-sticky-block js-scrollspy navbar-nav navbar-nav-lg nav-tabs card card-navbar-nav"
+                    data-hs-sticky-block-options='{
+                       "parentSelector": "#navbarVerticalNavMenu",
+                       "breakpoint": "lg",
+                       "startPoint": "#navbarVerticalNavMenu",
+                       "endPoint": "#stickyBlockEndPoint",
+                       "stickyOffsetTop": 20
+                     }'>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#content">
+                            <i class="tio-user-outlined nav-icon"></i> @L("BasicInformations")
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#PasswordSection">
+                            <i class="tio-lock-outlined nav-icon"></i> @L("Password")
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#LanguageSection">
+                            <i class="tio-settings-outlined nav-icon"></i> @L("Language")
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#recentDevicesSection">
+                            <i class="tio-devices-apple nav-icon"></i> @L("RecentUserLogins")
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#DeleteAccountSection">
+                            <i class="tio-delete-outlined nav-icon"></i> @L("DeleteYourAccount")
+                        </a>
+                    </li>
+                </ul>
+                <!-- End Navbar Nav -->
+            </div>
+        </div>
+        <!-- End Navbar -->
+    </div>
+
+    <div class="col-lg-9">
+        <div id="ProfileImageSaved" class="alert alert-success" style="display:none;" role="alert">
+            @L("ProfileImageSaved")
+        </div>
+        <div id="BasicInformationsSaved" class="alert alert-success" style="display:none;" role="alert">
+            @L("BasicInformationsSaved")
+        </div>
+        <div id="PasswordSaved" class="alert alert-success" style="display:none;" role="alert">
+            @L("PasswordSaved")
+        </div>
+
+
+        @await Html.PartialAsync("_ProfileImage.cshtml", Model.ProfileImage)
+
+        @await Html.PartialAsync("_BasicInformations.cshtml", Model.BasicInformations)
+
+        @await Html.PartialAsync("_Password.cshtml")
+
+        @await Html.PartialAsync("_Language.cshtml", Model.Languages)
+
+        @await Html.PartialAsync("_UserLoginAttempts.cshtml", Model.UserLoginAttempts)
+
+        @await Html.PartialAsync("_DeleteAccount.cshtml")
+
+        <!-- Card -->
+        <!-- End Card -->
+        <!-- Sticky Block End Point -->
+        <div id="stickyBlockEndPoint"></div>
+    </div>
+</div>

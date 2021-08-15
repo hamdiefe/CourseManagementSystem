@@ -1,0 +1,35 @@
+﻿@using CourseManagementSystem.Web.Models.Students
+@model StudentAddressCityDropdownViewModel
+
+@{ var selectListCity = new SelectList(Model.StudentCityList, "Id", "DisplayName"); }
+
+@if (Model.SelectedValue == null)
+{
+    <div class="row form-group">
+        <label for="Student_AddressCity" class="col-sm-3 col-form-label input-label"></label>
+
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm-down-break align-items-center">
+                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                        name="addressCity" asp-items="@selectListCity">
+                    <option value="">@L("PickCity") </option>
+                </select>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+<div class="row form-group">
+    <label for="Student_AddressCity" class="col-sm-3 col-form-label input-label"></label>
+    <div class="col-sm-9">
+        <div class="input-group input-group-sm-down-break align-items-center">
+            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                   id="Student_AddressCity-@Guid.NewGuid()" name="addressCity" asp-for="@Model.SelectedValue" asp-items="@selectListCity">
+                <option value="">@L("PickCity") </option>
+            </select>
+        </div>
+    </div>
+</div>
+}
+<script src="~/view-resources/Views/Students/_AddressCityDropdown.js" asp-append-version="true"></script>

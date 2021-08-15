@@ -1,0 +1,44 @@
+﻿@using CourseManagementSystem.Web.Models.Events
+@model AddEventStartDateFieldViewModel
+
+@{ var guid = Guid.NewGuid();}
+<div class="date-container">
+    <div class="startDateDiv">
+        <div class="row form-group">
+            <label class="col-sm-3 col-form-label input-label">@L("Date")</label>
+            <div class="col-sm-9">
+                <small class="form-text" style="display:none;">@L("StartDate")</small>
+
+                <div class="row js-form-message input-group input-group-sm-down-break align-items-center" style="margin: 0px !important;">
+                    <div id="Event_StartDate_@guid" class="js-flatpickr-@guid flatpickr-custom input-group input-group-merge"
+                         data-hs-flatpickr-options='{
+                              "appendTo": "#Event_StartDate_@guid",
+                              "dateFormat": "d/m/Y H:i",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")",
+                              "enableTime": true,
+                              "time_24hr": true}'>
+                        <input type="text" class="flatpickr-custom-form-control form-control"
+                               id="Event_StartDate" name="startDate" data-input value="" placeholder="@L("StartDate")">
+                    </div>
+                    <a class="js-delete-field js-delete-field input-group-add-field-delete delete-date" style="opacity: 1" href="javascript:;">
+                        <i class="tio-clear"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="endDateDiv"></div>
+    <hr />
+</div>
+<script>
+    $(document).ready(function () {
+        var _$eventTabContent = $("#CreateOrEditEventModalTabContent");
+        var _$eventForm = _$eventTabContent.find('form');
+        //Flatpckr
+        _$eventForm.find('.js-flatpickr-@guid').each(function () {
+            $.HSCore.components.HSFlatpickr.init(_$eventForm.find(this));
+        });
+    });
+</script>
+<script src="~/view-resources/Views/Events/_AddStartDateField.js" asp-append-version="true"></script>

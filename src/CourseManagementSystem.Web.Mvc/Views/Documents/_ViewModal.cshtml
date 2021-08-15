@@ -1,0 +1,22 @@
+﻿@using CourseManagementSystem.Web.Models.Documents
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model DocumentViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewDocument")))
+
+<div class="modal-body">
+    <div class="row form-group">
+        <label for="Document_Name" class="col-sm-3 col-form-label input-label">@L("DocumentName")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="name" id="Document_Name"
+                       value="@Model.Document.Description
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithClose.cshtml")
+</div>

@@ -1,0 +1,342 @@
+﻿@using CourseManagementSystem.Web.Models.Parents
+@using CourseManagementSystem.Web.Models.Common.Modals
+@using CourseManagementSystem.Models.Common
+@using System.Globalization
+@using CourseManagementSystem.Models.Phones
+@using CourseManagementSystem.Models.Addresses
+
+@model CreateOrEditParentModalViewModel
+@{ var selectListCountryPhoneCode = new SelectList(Model.ParentCountryList, "PhoneCode", "DualCode");
+    foreach (var selectOption in selectListCountryPhoneCode) { selectOption.Text = selectOption.Text + " +" + selectOption.Value; }
+
+    var selectListGender = Html.GetEnumSelectList(typeof(Gender));
+    foreach (var selectOption in selectListGender) { selectOption.Text = L("Enum_Gender_" + selectOption.Value); }
+
+    var selectListAddressType = Html.GetEnumSelectList(typeof(AddressType));
+    foreach (var selectOption in selectListAddressType) { selectOption.Text = L("Enum_AddressType_" + selectOption.Value); }
+
+    var selectListPhoneType = Html.GetEnumSelectList(typeof(PhoneType));
+    foreach (var selectOption in selectListPhoneType) { selectOption.Text = L("Enum_PhoneType_" + selectOption.Value); }
+
+    var selectListEducationalStatus = Html.GetEnumSelectList(typeof(EducationalStatus));
+    foreach (var selectOption in selectListEducationalStatus) { selectOption.Text = L("Enum_EducationalStatus_" + selectOption.Value); }
+
+    var selectListJob = new SelectList(Model.ParentJobList, "Id", "DisplayName", (Model.IsEditMode ? Model.Parent.JobId.ToString() : ""));
+
+    var selectListParentType = new SelectList(Model.ParentParentTypeList, "Id", "DisplayName", (Model.IsEditMode ? Model.Parent.ParentTypeId.ToString() : ""));
+
+    var selectListCountry = new SelectList(Model.ParentCountryList, "Id", "DisplayName");
+
+    var phoneList = Model.Parent.Phones.ToList();
+
+    var addressList = Model.Parent.Addresses.ToList();
+}
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditParent")) : L("CreateNewParent")))
+
+<div class="modal-body">
+    <ul class="js-tabs-to-dropdown nav nav-segment nav-fill nav-lg-down-break mb-5" id="CreateOrEditParentModalTab" role="tablist"
+        data-hs-transform-tabs-to-btn-options='{
+                  "transformResolution": "lg",
+                  "btnClassNames": "btn btn-block btn-white dropdown-toggle justify-content-center mb-3"
+                }'>
+        <li class="nav-item">
+            <a class="nav-link active" id="parent-general-section-tab" data-toggle="tab" href="#parent-general-section" role="tab">
+                <i class="tio-user-outlined mr-1"></i> @L("GeneralInformations")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="parent-phone-section-tab" data-toggle="tab" href="#parent-phone-section" role="tab">
+                <i class="tio-lock-outlined mr-1"></i> @L("Phone")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="parent-address-section-tab" data-toggle="tab" href="#parent-address-section" role="tab">
+                <i class="tio-city mr-1"></i> @L("Address")
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="CreateOrEditParentModalTabContent">
+        <div class="tab-pane fade show active" id="parent-general-section" role="tabpanel" aria-labelledby="parent-general-section-tab">
+            <form>
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" id="Parent_Id" value="@Model.Parent.Id" />}
+                <div class="row form-group">
+                    <label for="Parent_IdentityNumber" class="col-sm-3 col-form-label input-label">@L("IdentityNumber")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="number" class="js-masked-input form-control" name="identityNumber" id="Parent_IdentityNumber"
+                                   value="@Model.Parent.IdentityNumber?.ToString(CultureInfo.InvariantCulture)"
+                                   aria-label="xxxxxxxxxxx"
+                                   data-hs-mask-options='{
+                          "template": "00000000000"
+                       }'>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_Name" class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="name" id="Parent_Name"
+                                   value="@Model.Parent.Name"
+                                   maxlength="@CourseManagementSystem.Models.Parents.ParentConsts.MaxNameLength" minlength="@CourseManagementSystem.Models.Parents.ParentConsts.MinNameLength"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_Surname" class="col-sm-3 col-form-label input-label">@L("Surname")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="surname" id="Parent_Surname"
+                                   value="@Model.Parent.Surname"
+                                   maxlength="@CourseManagementSystem.Models.Parents.ParentConsts.MaxSurnameLength" minlength="@CourseManagementSystem.Models.Parents.ParentConsts.MinSurnameLength"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_Gender" class="col-sm-3 col-form-label input-label">@L("Gender")</label>
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                    id="Parent_Gender" name="gender" asp-for="@Model.Parent.Gender" asp-items="@selectListGender"
+                                    data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_Gender" class="col-sm-3 col-form-label input-label">@L("BirthDate")</label>
+
+                    <div class="col-sm-9">
+                        <div id="Parent_BirthDateDiv" class="js-flatpickr flatpickr-custom input-group input-group-merge"
+                             data-hs-flatpickr-options='{
+                              "appendTo": "#Parent_BirthDateDiv",
+                              "dateFormat": "d/m/Y",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")",
+                              "maxDate":"@DateTime.Now"
+                            }'>
+                            <input type="text" class="flatpickr-custom-form-control form-control"
+                                   id="Parent_BirthDate" name="birthDate" data-input value="@Model.Parent.BirthDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_BirthPlace" class="col-sm-3 col-form-label input-label">@L("BirthPlace")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="birthPlace" id="Parent_BirthPlace"
+                                   value="@Model.Parent.BirthPlace"
+                                   maxlength="@CourseManagementSystem.Models.Parents.ParentConsts.MaxBirthPlaceLength" minlength="@CourseManagementSystem.Models.Parents.ParentConsts.MinBirthPlaceLength">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_ParentTypeId" class="col-sm-3 col-form-label input-label">@L("ParentType")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                        id="Parent_ParentTypeId" name="parentTypeId" asp-for="@Model.Parent.ParentTypeId" asp-items="@selectListParentType"
+                                        data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                                    <option value="">@L("NonSelected") </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_EducationalStatus" class="col-sm-3 col-form-label input-label">@L("EducationalStatus")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                        id="Parent_EducationalStatus" name="educationalStatus" asp-for="@Model.Parent.EducationalStatus" asp-items="@selectListEducationalStatus"
+                                        data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_JobId" class="col-sm-3 col-form-label input-label">@L("Job")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                        id="Parent_JobId" name="jobId" asp-for="@Model.Parent.JobId" asp-items="@selectListJob"
+                                        data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                                    <option value="">@L("NonSelected") </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Parent_Email" class="col-sm-3 col-form-label input-label">@L("Email")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="email" id="Parent_Email"
+                                   value="@Model.Parent.Email"
+                                   maxlength="@CourseManagementSystem.Models.Parents.ParentConsts.MaxEmailLength" minlength="@CourseManagementSystem.Models.Parents.ParentConsts.MinEmailLength">
+                        </div>
+                    </div>
+                </div>
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+        <div class="tab-pane fade" id="parent-phone-section" role="tabpanel" aria-labelledby="parent-phone-section-tab">
+            <form>
+                @foreach (var item in phoneList)
+                {
+                    <div class="phone-container">
+                        <div class="row form-group">
+                            <label for="phoneLabel" class="col-sm-3 col-form-label input-label">@L("Phone")</label>
+
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break align-items-center">
+                                    <div class="input-group-prepend">
+                                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                                id="Parent_PhoneCode_@item.Id" name="phoneCode" asp-for="@item.Code" asp-items="@selectListCountryPhoneCode"
+                                                data-hs-select2-options='{
+                                   "width": "7rem"
+                                }'>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="js-masked-input form-control" id="Parent_PhoneNumber_@item.Id" name="phoneNumber" data-phone-Id="@item.Id"
+                                           value="@item.Number"
+                                           placeholder="(xxx) xxx xx xx"
+                                           aria-label="(xxx) xxx xx xx"
+                                           data-hs-mask-options='{
+                                              "template": "(000) 000 00 00"
+                                               }'>
+                                    <div class="input-group-append">
+                                        <div class="select2-custom">
+                                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                                    id="Parent_PhoneType_@item.Id" name="phoneType" asp-for="@item.Type" asp-items="@selectListPhoneType"
+                                                    data-hs-select2-options='{
+                                                            "minimumResultsForSearch": "Infinity",
+                                                            "dropdownAutoWidth": true,
+                                                            "width": "6rem"
+                                                          }'>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <a class="js-delete-field js-delete-field input-group-add-field-delete delete-phone" style="opacity: 1" href="javascript:;">
+                                        <i class="tio-clear"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="js-add-field">
+                    <div id="addPhoneFieldContainer">
+
+                    </div>
+                    <a id="AddPhone" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" style="margin-top: 0;" href="javascript:;">
+                        <i class="tio-add"></i> @L("AddPhone")
+                    </a>
+                </div>
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+        <div class="tab-pane fade" id="parent-address-section" role="tabpanel" aria-labelledby="parent-address-section-tab">
+            <form>
+                @foreach (var item in addressList)
+                {
+                    <div class="address-container">
+                        <div class="row form-group">
+                            <label for="Parent_AddressType-@item.Id" class="col-sm-3 col-form-label input-label">@L("Address")</label>
+
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break">
+                                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                            id="Parent_AddressType-@item.Id" name="addressType" asp-for="@item.Type" asp-items="@selectListAddressType"
+                                            data-hs-select2-options='{
+                                            "minimumResultsForSearch": "Infinity",
+                                            "placeholder": "@L("Pick")"
+                                        }'>
+                                    </select>
+                                    <a class="js-delete-field js-delete-field input-group-add-field-delete delete-address" style="opacity: 1" href="javascript:;">
+                                        <i class="tio-clear"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="locationDiv">
+                            <div class="row form-group">
+                                <label for="Parent_AddressCountry-@item.Id" class="col-sm-3 col-form-label input-label"></label>
+
+                                <div class="col-sm-9">
+                                    <div class="input-group input-group-sm-down-break align-items-center">
+                                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                                id="Parent_AddressCountry-@item.Id" name="addressCountry" asp-for="@item.CountryId" asp-items="@selectListCountry">
+                                            <option value="">@L("PickCountry") </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cityDiv">
+                                <input type="hidden" name="addressCityId" value="@item.CityId" />
+                            </div>
+                            <div class="townDiv">
+                                <input type="hidden" name="addressTownId" value="@item.TownId" />
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="Parent_AddressDetail" class="col-sm-3 col-form-label input-label"></label>
+
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break">
+                                    <textarea type="text" class="form-control" name="addressDetail" id="Parent_AddressDetail-@item.Id" data-address-id="@item.Id"
+                                              placeholder="@L("Address")"
+                                              maxlength="@CourseManagementSystem.Models.Addresses.AddressConsts.MaxDetailLength"
+                                              minlength="@CourseManagementSystem.Models.Addresses.AddressConsts.MinDetailLength">@item.Detail</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+
+                <div class="js-add-field">
+                    <div id="addAddressFieldContainer">
+
+                    </div>
+                    <a id="AddAddress" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" style="margin-top: 0;" href="javascript:;">
+                        <i class="tio-add"></i> @L("AddAddress")
+                    </a>
+                </div>
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/view-resources/Views/Parents/_CreateOrEditModal.js" asp-append-version="true"></script>

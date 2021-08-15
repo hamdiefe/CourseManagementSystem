@@ -1,0 +1,16 @@
+﻿<div id="sidebarCompact" class="d-none">
+    <aside class="js-navbar-vertical-aside navbar navbar-vertical-aside navbar-vertical navbar-vertical-fixed navbar-expand-xl navbar-bordered  ">
+        <div class="navbar-vertical-container">
+            <div class="navbar-brand d-flex justify-content-center">
+                <!-- Logo -->
+                @await Html.PartialAsync("~/Views/Shared/Layout/Sidebars/SidebarCompact/_Logo.cshtml")
+                <!-- End Logo -->
+            </div>
+            <!-- Content -->
+            <div class="navbar-vertical-content">
+                @await Html.PartialAsync("~/Views/Shared/Layout/Sidebars/SidebarCompact/_NavMenu.cshtml")
+            </div>
+            <!-- End Content -->
+        </div>
+    </aside>
+</div>

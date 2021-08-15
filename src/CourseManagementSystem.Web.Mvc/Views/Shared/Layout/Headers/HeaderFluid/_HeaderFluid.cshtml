@@ -1,0 +1,37 @@
+﻿@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarUserArea
+<div id="headerFluid" class="d-none">
+    <header id="header" class="navbar navbar-expand-xl navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered  ">
+        <div class="js-mega-menu navbar-nav-wrap">
+            <div class="navbar-brand-wrapper">
+                <!-- Logo -->
+                @await Html.PartialAsync("~/Views/Shared/Layout/Headers/HeaderFluid/_Logo.cshtml")
+                <!-- End Logo -->
+            </div>
+            <!-- Secondary Content -->
+            <div class="navbar-nav-wrap-content-right">
+                <!-- Navbar -->
+                <ul class="navbar-nav align-items-center flex-row">                   
+                    <li class="nav-item">
+                        @await Component.InvokeAsync(typeof(RightNavbarUserAreaViewComponent))
+                    </li>
+                    <li class="nav-item">
+                        <!-- Toggle -->
+                        <button type="button" class="navbar-toggler btn btn-ghost-secondary rounded-circle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navbarNavMenu" data-toggle="collapse" data-target="#navbarNavMenu">
+                            <i class="tio-menu-hamburger"></i>
+                        </button>
+                        <!-- End Toggle -->
+                    </li>
+                </ul>
+                <!-- End Navbar -->
+            </div>
+            <!-- End Secondary Content -->
+            <!-- Navbar -->
+            <div class="navbar-nav-wrap-content-left collapse navbar-collapse" id="navbarNavMenu">
+                <div class="navbar-body">
+                    @await Html.PartialAsync("~/Views/Shared/Layout/Headers/HeaderFluid/_NavMenu.cshtml")
+                </div>
+            </div>
+            <!-- End Navbar -->
+        </div>
+    </header>
+</div>

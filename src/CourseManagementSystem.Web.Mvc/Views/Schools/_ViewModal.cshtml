@@ -1,0 +1,33 @@
+﻿@using CourseManagementSystem.Web.Models.Schools
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model SchoolViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewSchool")))
+
+<div class="modal-body">
+    <div class="row form-group">
+        <label for="School_Name" class="col-sm-3 col-form-label input-label">@L("SchoolName")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="name" id="School_Name"
+                       value="@Model.School.Name"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="School_SchoolType" class="col-sm-3 col-form-label input-label">@L("SchoolType")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="schoolType" id="School_SchoolTypes"
+                       value="@L("Enum_SchoolType_" + (int)Model.School.Type)"
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithClose.cshtml")
+</div>

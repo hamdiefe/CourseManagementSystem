@@ -1,0 +1,33 @@
+﻿@using CourseManagementSystem.Web.Models.Jobs
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model JobViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewJob")))
+
+<div class="modal-body">
+    <div class="row form-group">
+        <label for="Job_Name" class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="name" id="Job_Name"
+                       value="@Model.Job.Name"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="Job_Name" class="col-sm-3 col-form-label input-label">@L("Description")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="description" id="Job_Description"
+                       value="@Model.Job.Description"
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithClose.cshtml")
+</div>

@@ -1,0 +1,59 @@
+﻿@using CourseManagementSystem.Web.Models.Roles
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model EditRoleModalViewModel
+@{ Layout = null; }
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("EditRole")))
+<form name="roleCreateForm" role="form" class="form-horizontal">
+    <input type="hidden" name="Id" value="@Model.Role.Id" />
+    <input type="hidden" name="IsStatic" value="@(Model.Role.IsStatic.ToString())" />
+    <div class="modal-body">
+        <div class="row form-group">
+            <label for="RoleName" class="col-sm-3 col-form-label input-label">@L("RoleName")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input id="RoleName" type="text" name="name" class="form-control" value="@Model.Role.Name" @(Model.Role.IsStatic ? "disabled" : "") required maxlength="32" minlength="2">
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="DisplayName" class="col-sm-3 col-form-label input-label">@L("DisplayName")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input id="DisplayName" type="text" name="displayName" class="form-control" value="@Model.Role.DisplayName" required maxlength="32" minlength="2">
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="Description" class="col-sm-3 col-form-label input-label">@L("RoleDescription")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <textarea id="Description" type="text" name="description" class="form-control">@Model.Role.Description</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="Description" class="col-sm-3 col-form-label input-label">@L("Permissions")</label>
+
+            <div class="col-sm-9">
+                <div class="row">
+                    @foreach (var permission in Model.Permissions)
+                    {
+        <div class="col-md-6">
+            <input type="checkbox" name="permission" value="@permission.Name" id="@($"permission{permission.Name}")" @(Model.HasPermission(permission) ? "checked" : "") @(Model.Role.IsStatic ? "disabled" : "") />
+            <label for="@($"permission{permission.Name}")">@permission.DisplayName</label>
+        </div>}
+                </div>
+
+            </div>
+        </div>
+        @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+    </div>
+</form>
+
+
+<script src="~/view-resources/Views/Roles/_EditModal.js" asp-append-version="true"></script>

@@ -1,0 +1,56 @@
+﻿@using Abp.Configuration.Startup
+@using Abp.Web.Security.AntiForgery
+@using CourseManagementSystem
+@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@using CourseManagementSystem.Web.Resources
+@inject IAbpAntiForgeryManager AbpAntiForgeryManager
+@inject IWebResourceManager WebResourceManager
+@inject ILanguageManager LanguageManager
+@inject IMultiTenancyConfig MultiTenancyConfig
+@{ Layout = null;
+    AbpAntiForgeryManager.SetCookie(Context);
+
+    var pageTitle = !string.IsNullOrWhiteSpace(ViewBag.Title) ? ViewBag.Title + " / " : "";
+    pageTitle += "Yıldızlar Eğitim Kulubü"; }
+
+
+<!DOCTYPE html>
+<html lang="@LanguageManager.CurrentLanguage.Name" class="h-100">
+
+<head>
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Title -->
+    <title>@pageTitle</title>
+
+    @await Html.PartialAsync("_Styles.cshtml")
+    @RenderSection("styles", required: false)
+</head>
+
+<body class="d-flex align-items-center min-h-100">
+    <!-- ========== HEADER ========== -->
+    <header class="position-absolute top-0 left-0 right-0 mt-3 mx-3">
+        <div class="d-flex d-lg-none justify-content-between">
+            <a href="index.html">
+                <img class="w-100" src="/front-admin/assets/svg/logos/logo.svg" alt="Image Description" style="min-width: 7rem; max-width: 7rem;">
+            </a>
+
+            @await Component.InvokeAsync(typeof(RightNavbarLanguageSwitchViewComponent))
+
+        </div>
+    </header>
+    <!-- ========== END HEADER ========== -->
+    <main id="content" role="main" class="main pt-0">
+        <!-- Content -->
+        @RenderBody()
+        <!-- End Content -->
+    </main>
+
+    @await Html.PartialAsync("_Scripts.cshtml")
+    @RenderSection("scripts", required: false)
+    @WebResourceManager.RenderScripts()
+</body>
+
+</html>

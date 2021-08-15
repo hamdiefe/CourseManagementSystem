@@ -1,0 +1,459 @@
+﻿@using CourseManagementSystem.Web.Models.Students
+@using CourseManagementSystem.Web.Models.Common.Modals
+@using CourseManagementSystem.Models.Common
+@using System.Globalization
+@using CourseManagementSystem.Models.Phones
+@using CourseManagementSystem.Models.Addresses
+
+@model CreateOrEditStudentModalViewModel
+@{ var selectListCountryPhoneCode = new SelectList(Model.StudentCountryList, "PhoneCode", "DualCode");
+    foreach (var selectOption in selectListCountryPhoneCode) { selectOption.Text = selectOption.Text + " +" + selectOption.Value; }
+
+    var selectListGender = Html.GetEnumSelectList(typeof(Gender));
+    foreach (var selectOption in selectListGender) { selectOption.Text = L("Enum_Gender_" + selectOption.Value); }
+
+    var selectListAddressType = Html.GetEnumSelectList(typeof(AddressType));
+    foreach (var selectOption in selectListAddressType) { selectOption.Text = L("Enum_AddressType_" + selectOption.Value); }
+
+    var selectListPhoneType = Html.GetEnumSelectList(typeof(PhoneType));
+    foreach (var selectOption in selectListPhoneType) { selectOption.Text = L("Enum_PhoneType_" + selectOption.Value); }
+
+    var selectListCurrency = Html.GetEnumSelectList(typeof(Currency));
+    foreach (var selectOption in selectListCurrency) { selectOption.Text = L("Enum_Currency_" + selectOption.Value); }
+
+    var selectListGrade = new SelectList(Model.StudentGradeList, "Id", "DisplayName", (Model.IsEditMode ? Model.Student.GradeId.ToString() : ""));
+
+    var selectListSchool = new SelectList(Model.StudentSchoolList, "Id", "DisplayName", (Model.IsEditMode ? Model.Student.SchoolId.ToString() : ""));
+
+    var selectListCountry = new SelectList(Model.StudentCountryList, "Id", "DisplayName");
+
+    var selectListParent = new SelectList(Model.StudentParentList, "Id", "DisplayName");
+
+
+    var phoneList = Model.Student.Phones.ToList();
+
+    var addressList = Model.Student.Addresses.ToList();
+
+    var parentList = Model.Student.StudentParents.ToList();
+}
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditStudent")) : L("CreateNewStudent")))
+
+<div class="modal-body">
+    <ul class="js-tabs-to-dropdown nav nav-segment nav-fill nav-lg-down-break mb-5" id="CreateOrEditStudentModalTab" role="tablist"
+        data-hs-transform-tabs-to-btn-options='{
+                  "transformResolution": "lg",
+                  "btnClassNames": "btn btn-block btn-white dropdown-toggle justify-content-center mb-3"
+                }'>
+        <li class="nav-item">
+            <a class="nav-link active" id="general-section-tab" data-toggle="tab" href="#general-section" role="tab">
+                <i class="tio-user-outlined mr-1"></i> @L("GeneralInformations")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="phone-section-tab" data-toggle="tab" href="#phone-section" role="tab">
+                <i class="tio-lock-outlined mr-1"></i> @L("Phone")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="address-section-tab" data-toggle="tab" href="#address-section" role="tab">
+                <i class="tio-city mr-1"></i> @L("Address")
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="parent-section-tab" data-toggle="tab" href="#parent-section" role="tab">
+                <i class="tio-city mr-1"></i> @L("Parent")
+            </a>
+        </li>
+    </ul>
+    <div class="tab-content" id="CreateOrEditStudentModalTabContent">
+        <div class="tab-pane fade show active" id="general-section" role="tabpanel" aria-labelledby="general-section-tab">
+            <form>
+                @if (Model.IsEditMode)
+                {
+                    <input type="hidden" name="id" id="Student_Id" value="@Model.Student.Id" />}
+                <div class="row form-group">
+                    <label for="Student_IdentityNumber" class="col-sm-3 col-form-label input-label">@L("IdentityNumber")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="number" class="js-masked-input form-control" name="identityNumber" id="Student_IdentityNumber"
+                                   value="@Model.Student.IdentityNumber?.ToString(CultureInfo.InvariantCulture)"
+                                   aria-label="xxxxxxxxxxx"
+                                   data-hs-mask-options='{
+                          "template": "00000000000"
+                       }'>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_Name" class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="name" id="Student_Name"
+                                   value="@Model.Student.Name"
+                                   maxlength="@CourseManagementSystem.Models.Students.StudentConsts.MaxNameLength" minlength="@CourseManagementSystem.Models.Students.StudentConsts.MinNameLength"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_Surname" class="col-sm-3 col-form-label input-label">@L("Surname")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="surname" id="Student_Surname"
+                                   value="@Model.Student.Surname"
+                                   maxlength="@CourseManagementSystem.Models.Students.StudentConsts.MaxSurnameLength" minlength="@CourseManagementSystem.Models.Students.StudentConsts.MinSurnameLength"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_Gender" class="col-sm-3 col-form-label input-label">@L("Gender")</label>
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                    id="Student_Gender" name="gender" asp-for="@Model.Student.Gender" asp-items="@selectListGender"
+                                    data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_Gender" class="col-sm-3 col-form-label input-label">@L("BirthDate")</label>
+
+                    <div class="col-sm-9">
+                        <div id="Student_BirthDateDiv" class="js-flatpickr flatpickr-custom input-group input-group-merge"
+                             data-hs-flatpickr-options='{
+                              "appendTo": "#Student_BirthDateDiv",
+                              "dateFormat": "d/m/Y",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")",
+                              "maxDate":"@DateTime.Now"
+                            }'>
+                            <input type="text" class="flatpickr-custom-form-control form-control"
+                                   id="Student_BirthDate" name="birthDate" data-input value="@Model.Student.BirthDate">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_BirthPlace" class="col-sm-3 col-form-label input-label">@L("BirthPlace")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="birthPlace" id="Student_BirthPlace"
+                                   value="@Model.Student.BirthPlace"
+                                   maxlength="@CourseManagementSystem.Models.Students.StudentConsts.MaxBirthPlaceLength" minlength="@CourseManagementSystem.Models.Students.StudentConsts.MinBirthPlaceLength">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_SchoolId" class="col-sm-3 col-form-label input-label">@L("School")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                        id="Student_SchoolId" name="schoolId" asp-for="@Model.Student.SchoolId" asp-items="@selectListSchool"
+                                        data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                                    <option value="">@L("NonSelected") </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_GradeId" class="col-sm-3 col-form-label input-label">@L("Grade")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <div class="js-form-message input-group input-group-sm-down-break">
+                                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                        id="Student_GradeId" name="gradeId" asp-for="@Model.Student.GradeId" asp-items="@selectListGrade"
+                                        data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                                    <option value="">@L("NonSelected") </option>
+                                </select>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_StudentNumber" class="col-sm-3 col-form-label input-label">@L("StudentNumber")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="number" class="form-control" name="studentNumber" id="Student_StudentNumber"
+                                   value="@Model.Student.StudentNumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_Email" class="col-sm-3 col-form-label input-label">@L("Email")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" class="form-control" name="email" id="Student_Email"
+                                   value="@Model.Student.Email"
+                                   maxlength="@CourseManagementSystem.Models.Students.StudentConsts.MaxEmailLength" minlength="@CourseManagementSystem.Models.Students.StudentConsts.MinEmailLength">
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_HourlyPaymentPeriod" class="col-sm-3 col-form-label input-label">@L("HourlyPaymentPeriod")</label>
+
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="number" class="form-control" name="hourlyPaymentPeriod" id="Student_HourlyPaymentPeriod"
+                                   value="@Model.Student.HourlyPaymentPeriod"
+                                   required>
+                        </div>
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="Student_HourlyPaymentAmount" class="col-sm-3 col-form-label input-label">@L("HourlyPaymentAmount")</label>
+                    
+                    <div class="col-sm-9">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <input type="text" id="Student_HourlyPaymentAmount" class="form-control" name="hourlyPaymentAmount" value="@Model.Student.HourlyPaymentAmount" placeholder="0.00" aria-label="0.00">
+                            <div class="input-group-append">
+                                <!-- Select -->
+                                <div id="Student_Currency" class="select2-custom select2-custom-right">
+                                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                            name="currency" asp-for="@Model.Student.Currency" asp-items="@selectListCurrency"
+                                            data-hs-select2-options='{
+                                    "dropdownParent": "#Student_Currency",
+                                    "dropdownAutoWidth": true,
+                                    "width": true
+                                  }'>
+                                    </select>
+                                </div>
+                                <!-- End Select -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <label class="row form-group toggle-switch" for="Student_IsActive">
+                    <span class="col-8 col-sm-9 toggle-switch-content ml-0">
+                        <span class="d-block text-dark mb-1">@L("Active")</span>
+                    </span>
+                    <span class="col-4 col-sm-3">
+                        @if (Model.Student.IsActive == true)
+                        {
+                            <input type="checkbox" class="toggle-switch-input" id="Student_IsActive" checked>
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="toggle-switch-input" id="Student_IsActive">
+                        }
+                        <span class="toggle-switch-label ml-auto">
+                            <span class="toggle-switch-indicator"></span>
+                        </span>
+                    </span>
+                </label>
+
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+        <div class="tab-pane fade" id="phone-section" role="tabpanel" aria-labelledby="phone-section-tab">
+            <form>
+                @foreach (var item in phoneList)
+                {
+                    <div class="phone-container">
+                        <div class="row form-group">
+                            <label for="phoneLabel" class="col-sm-3 col-form-label input-label">@L("Phone")</label>
+
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break align-items-center">
+                                    <div class="input-group-prepend">
+                                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                                id="Student_PhoneCode_@item.Id" name="phoneCode" asp-for="@item.Code" asp-items="@selectListCountryPhoneCode"
+                                                data-hs-select2-options='{
+                                   "width": "7rem"
+                                }'>
+                                        </select>
+                                    </div>
+                                    <input type="text" class="js-masked-input form-control" id="Student_PhoneNumber_@item.Id" name="phoneNumber" data-phone-Id="@item.Id"
+                                           value="@item.Number"
+                                           placeholder="(xxx) xxx xx xx"
+                                           aria-label="(xxx) xxx xx xx"
+                                           data-hs-mask-options='{
+                                              "template": "(000) 000 00 00"
+                                               }'>
+                                    <div class="input-group-append">
+                                        <div class="select2-custom">
+                                            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                                    id="Student_PhoneType_@item.Id" name="phoneType" asp-for="@item.Type" asp-items="@selectListPhoneType"
+                                                    data-hs-select2-options='{
+                                                            "minimumResultsForSearch": "Infinity",
+                                                            "dropdownAutoWidth": true,
+                                                            "width": "6rem"
+                                                          }'>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <a class="js-delete-field js-delete-field input-group-add-field-delete delete-phone" style="opacity: 1" href="javascript:;">
+                                        <i class="tio-clear"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="js-add-field">
+                    <div id="addPhoneFieldContainer">
+
+                    </div>
+                    <a id="AddPhone" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" style="margin-top: 0;" href="javascript:;">
+                        <i class="tio-add"></i> @L("AddPhone")
+                    </a>
+                </div>
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+        <div class="tab-pane fade" id="address-section" role="tabpanel" aria-labelledby="address-section-tab">
+            <form>
+                @foreach (var item in addressList)
+                {
+                    <div class="address-container">
+                        <div class="row form-group">
+                            <label for="Student_AddressType-@item.Id" class="col-sm-3 col-form-label input-label">@L("Address")</label>
+
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break">
+                                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                            id="Student_AddressType-@item.Id" name="addressType" asp-for="@item.Type" asp-items="@selectListAddressType"
+                                            data-hs-select2-options='{
+                                            "minimumResultsForSearch": "Infinity",
+                                            "placeholder": "@L("Pick")"
+                                        }'>
+                                    </select>
+                                    <a class="js-delete-field js-delete-field input-group-add-field-delete delete-address" style="opacity: 1" href="javascript:;">
+                                        <i class="tio-clear"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="locationDiv">
+                            <div class="row form-group">
+                                <label for="Student_AddressCountry-@item.Id" class="col-sm-3 col-form-label input-label"></label>
+
+                                <div class="col-sm-9">
+                                    <div class="input-group input-group-sm-down-break align-items-center">
+                                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                                id="Student_AddressCountry-@item.Id" name="addressCountry" asp-for="@item.CountryId" asp-items="@selectListCountry">
+                                            <option value="">@L("PickCountry") </option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cityDiv">
+                                <input type="hidden" name="addressCityId" value="@item.CityId" />
+                            </div>
+                            <div class="townDiv">
+                                <input type="hidden" name="addressTownId" value="@item.TownId" />
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="Student_AddressDetail" class="col-sm-3 col-form-label input-label"></label>
+
+                            <div class="col-sm-9">
+                                <div class="js-form-message input-group input-group-sm-down-break">
+                                    <textarea type="text" class="form-control" name="addressDetail" id="Student_AddressDetail-@item.Id" data-address-id="@item.Id"
+                                              placeholder="@L("Address")"
+                                              maxlength="@CourseManagementSystem.Models.Addresses.AddressConsts.MaxDetailLength"
+                                              minlength="@CourseManagementSystem.Models.Addresses.AddressConsts.MinDetailLength">@item.Detail</textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                }
+
+                <div class="js-add-field">
+                    <div id="addAddressFieldContainer">
+
+                    </div>
+                    <a id="AddAddress" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" style="margin-top: 0;" href="javascript:;">
+                        <i class="tio-add"></i> @L("AddAddress")
+                    </a>
+                </div>
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+        <div class="tab-pane fade" id="parent-section" role="tabpanel" aria-labelledby="parent-section-tab">
+            <form>
+                @foreach (var item in parentList)
+                {
+                    <div class="parent-container">
+                        <div class="js-form-message input-group input-group-sm-down-break">
+                            <a class="media align-items-center" href="javascript:;" data-toggle="modal" data-target="#CreateOrEditParentModal" name="editParent">
+                                @if (item.Parent.Gender == Gender.Male)
+                                {
+                                    <div class="avatar avatar-soft-primary avatar-circle  mr-3">
+                                        <span class="avatar-initials">@item.Parent.Name.Substring(0, 1)</span>
+                                    </div>
+                                }
+                                @if (item.Parent.Gender == Gender.Female)
+                                {
+                                    <div class="avatar avatar-soft-danger avatar-circle  mr-3">
+                                        <span class="avatar-initials">@item.Parent.Name.Substring(0, 1)</span>
+                                    </div>
+                                }
+                                @if (item.Parent.Gender == Gender.NonSelected)
+                                {
+                                    <div class="avatar avatar-soft-warning avatar-circle  mr-3">
+                                        <span class="avatar-initials">@item.Parent.Name.Substring(0, 1)</span>
+                                    </div>
+                                }
+
+                                <div class="media-body">
+                                    @if (item.ParentTypeName != "")
+                                    {
+                                        <span class="text-body text-hover-primary">@item.Parent.Name @item.Parent.Surname (@item.ParentTypeName)</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-body text-hover-primary">@item.Parent.Name @item.Parent.Surname</span>
+                                    }
+                                    <input type="hidden" name="parentId" value="@item.Parent.Id" data-studentParent-id="@item.Id">
+                                </div>
+                            </a>
+                            <a class="js-delete-field js-delete-field input-group-add-field-delete delete-parent" style="opacity: 1" href="javascript:;">
+                                <i class="tio-clear"></i>
+                            </a>
+
+                        </div>
+                        <hr />
+                    </div>
+                }
+                <div class="js-add-field">
+                    <div id="addParentFieldContainer">
+
+                    </div>
+                    <a id="AddParent" class="js-create-field form-link btn btn-sm btn-no-focus btn-ghost-primary" data-toggle="modal" data-target="#CreateOrEditParentModal" style="margin-top: 0;" href="javascript:;">
+                        <i class="tio-add"></i> @L("AddParent")
+                    </a>
+                </div>
+
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/view-resources/Views/Students/_CreateOrEditModal.js" asp-append-version="true"></script>

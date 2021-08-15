@@ -1,0 +1,34 @@
+﻿@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarUserArea
+<div id="headerMain" class="d-none">
+    <header id="header" class="navbar navbar-expand-lg navbar-fixed navbar-height navbar-flush navbar-container navbar-bordered">
+        <div class="navbar-nav-wrap">
+            <div class="navbar-brand-wrapper">
+                <!-- Logo -->
+                @await Html.PartialAsync("~/Views/Shared/Layout/Headers/HeaderMain/_Logo.cshtml")
+                <!-- End Logo -->
+            </div>
+
+            <div class="navbar-nav-wrap-content-left">
+                <!-- Navbar Vertical Toggle -->
+                <button type="button" class="js-navbar-vertical-aside-toggle-invoker close mr-3">
+                    <i class="tio-first-page navbar-vertical-aside-toggle-short-align" data-toggle="tooltip" data-placement="right" title="Collapse"></i>
+                    <i class="tio-last-page navbar-vertical-aside-toggle-full-align" data-template='<div class="tooltip d-none d-sm-block" role="tooltip"><div class="arrow"></div><div class="tooltip-inner"></div></div>' data-toggle="tooltip" data-placement="right" title="Expand"></i>
+                </button>
+                <!-- End Navbar Vertical Toggle -->
+                @*@await Html.PartialAsync("~/Views/Shared/Layout/Headers/HeaderMain/_Search.cshtml")*@
+            </div>
+
+            <!-- Secondary Content -->
+            <div class="navbar-nav-wrap-content-right">
+                <!-- Navbar -->
+                <ul class="navbar-nav align-items-center flex-row">
+                    <li class="nav-item">
+                        @await Component.InvokeAsync(typeof(RightNavbarUserAreaViewComponent))
+                    </li>
+                </ul>
+                <!-- End Navbar -->
+            </div>
+            <!-- End Secondary Content -->
+        </div>
+    </header>
+</div>

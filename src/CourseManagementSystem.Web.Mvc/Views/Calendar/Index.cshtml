@@ -1,0 +1,350 @@
+﻿@using CourseManagementSystem.Web.Startup
+
+@{ ViewBag.Title = L("Calendar");
+    ViewBag.CurrentPageName = PageNames.Calendar; }
+
+@section scripts
+{
+    <script src="~/view-resources/Views/Calendar/Index.js" asp-append-version="true"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/tr.js" asp-append-version="true"></script>
+    <script src="~/front-admin/assets/vendor/select2-localization/tr.min.js"></script>
+}
+@section styles
+{
+
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row align-items-center mb-3">
+        <div class="col-sm">
+            <h1 class="page-header-title">@L("Calendar") <span class="badge badge-soft-dark ml-2 infoTotalQty"></span></h1>
+        </div>
+        <div class="col-sm-auto">
+            <a class="btn btn-primary" id="RefreshPaymentsButton">@L("RefreshPayments")</a>
+
+            <a class="btn btn-primary" id="CreateNewEventButton" href="javascript:;" data-toggle="modal" data-target="#CreateOrEditModal">@L("CreateNewEvent")</a>
+            <a id="EditEventButton" href="javascript:;" data-toggle="modal" data-target="#CreateOrEditModal"></a>
+        </div>
+    </div>
+    <!-- End Row -->
+</div>
+<!-- End Page Header -->
+<!-- Custom Header -->
+<div class="row align-items-sm-center mb-4">
+    <div class="col-lg-5 mb-2 mb-lg-0">
+        <div class="d-flex align-items-center">
+            <button type="button" class="btn btn-white mr-3" data-toggle="tooltip" data-placement="top" title="" data-fc-today>@L("Today")</button>
+
+            <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary btn-no-focus rounded-circle mr-1" data-fc-prev-month data-toggle="tooltip" data-placement="top" title="@L("Previous")">
+                <i class="tio-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary btn-no-focus rounded-circle ml-1" data-fc-next-month data-toggle="tooltip" data-placement="top" title="@L("Next")">
+                <i class="tio-chevron-right"></i>
+            </button>
+
+            <div class="ml-3">
+                <h4 class="h3 mb-0" data-fc-title></h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="d-sm-flex align-items-sm-center">
+            
+            <!-- End Input Group -->
+            <!-- Input Group -->
+            <div class="input-group input-group-merge mr-2 mb-2 mb-sm-0">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="tio-search"></i>
+                    </div>
+                </div>
+                <input type="text" id="filter-by-title" class="form-control" placeholder="@L("SearchByTitle")">
+            </div>
+            <!-- End Input Group -->
+            <!-- Unfold -->
+            <div class="hs-unfold mr-2">
+                <a class="js-hs-unfold-invoker btn btn-white dropdown-toggle" href="javascript:;"
+                   data-hs-unfold-options='{
+                     "target": "#calendarFilterDropdown",
+                     "type": "css-animation"
+                   }'>
+                    <i class="tio-filter-list mr-1"></i> @L("Filter")
+                </a>
+
+                <div id="calendarFilterDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-card" style="min-width: 15rem;">
+                    <!-- Card -->
+                    <div class="card">
+                        <div class="card-body">
+                            <!-- Custom Checkbox -->
+                            <div class="custom-control custom-checkbox checkbox-outline-primary" data-filter>
+                                <input type="checkbox" id="calendarHsTeamCheckCheck" class="custom-control-input" value="fullcalendar-custom-event-hs-team" checked>
+                                <label class="custom-control-label" for="calendarHsTeamCheckCheck">@L("Enum_EventStatus_0")</label>
+                            </div>
+                            <!-- End Custom Checkbox -->
+                            <!-- Custom Checkbox -->
+                            <div class="custom-control custom-checkbox checkbox-outline-success" data-filter>
+                                <input type="checkbox" id="calendarHolidaysCheck" class="custom-control-input" value="fullcalendar-custom-event-holidays" checked>
+                                <label class="custom-control-label" for="calendarHolidaysCheck">@L("Enum_EventStatus_1")</label>
+                            </div>
+                            <!-- End Custom Checkbox -->
+                            <!-- Custom Checkbox -->
+                            <div class="custom-control custom-checkbox checkbox-outline-danger" data-filter>
+                                <input type="checkbox" id="calendarTasksCheck" class="custom-control-input" value="fullcalendar-custom-event-tasks" checked>
+                                <label class="custom-control-label" for="calendarTasksCheck">@L("Enum_EventStatus_2")</label>
+                            </div>
+                            <!-- End Custom Checkbox -->
+
+                        </div>
+                    </div>
+                    <!-- End Card -->
+                </div>
+            </div>
+            <!-- End Unfold -->
+            <!-- Select2 -->
+            <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" data-fc-grid-view
+                    data-hs-select2-options='{
+                        "minimumResultsForSearch": "Infinity",
+                        "width": "100px"
+                      }'>
+                <option value="dayGridMonth">@L("Month")</option>
+                <option value="timeGridWeek">@L("Week")</option>
+                <option value="timeGridDay">@L("Day")</option>
+                <option value="listWeek">@L("List")</option>
+            </select>
+            <!-- End Select2 -->
+        </div>
+    </div>
+</div>
+<!-- End Custom Header -->
+<!-- Fullcalendar -->
+<div id="js-fullcalendar" class="fullcalendar-custom"></div>
+<!-- End Fullcalendar -->
+
+
+
+<div class="modal fade" id="CreateOrEditModal" tabindex="-1" role="dialog" aria-labelledby="createOrEditTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="addEventToCalendarModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-close">
+                <button type="button" class="btn btn-icon btn-sm btn-ghost-secondary" data-dismiss="modal" aria-label="Close">
+                    <i class="tio-clear tio-lg"></i>
+                </button>
+            </div>
+            <!-- End Header -->
+            <!-- Body -->
+            <div class="modal-body">
+                <!-- Media -->
+                <div class="media">
+                    <label for="eventTitleLabel" class="sr-only">Title</label>
+
+                    <textarea id="eventTitleLabel" class="form-control form-control-title" placeholder="Add title"></textarea>
+                </div>
+                <!-- End Media -->
+
+                <div class="row form-group">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-format-points nav-icon"></i>
+
+                            <div class="media-body">Event type</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <!-- Select -->
+                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;" id="eventColorLabel"
+                                data-hs-select2-options='{
+                          "minimumResultsForSearch": "Infinity",
+                          "placeholder": "Select event color",
+                          "dropdownAutoWidth": true,
+                          "width": true
+                        }'>
+                            <option value="fullcalendar-custom-event-hs-team" selected data-option-template='<span class="legend-indicator bg-primary"></span>HS Team'>HS Team</option>
+                            <option value="fullcalendar-custom-event-reminders" data-option-template='<span class="legend-indicator bg-danger"></span>Reminders'>Reminders</option>
+                            <option value="fullcalendar-custom-event-tasks" data-option-template='<span class="legend-indicator bg-dark"></span>Tasks'>Tasks</option>
+                            <option value="fullcalendar-custom-event-holidays" data-option-template='<span class="legend-indicator bg-warning"></span>Success'>Success</option>
+                        </select>
+                        <!-- End Select -->
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <div class="row form-group">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-event nav-icon"></i>
+
+                            <div class="media-body">Deadline</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="eventDateRangeLabel" class="sr-only">Date</label>
+
+                        <!-- Flatpickr -->
+                        <input type="text" id="eventDateRangeLabel" class="js-flatpickr form-control flatpickr-custom mb-2" placeholder="Select dates"
+                               data-hs-flatpickr-options='{
+                         "dateFormat": "m/d/Y",
+                         "mode": "range",
+                         "minDate": "12/01/2020"
+                       }'>
+                        <!-- End Flatpickr -->
+
+                        <label for="eventRepeatLabel" class="text-body mr-2 mb-0">Repeat:</label>
+
+                        <!-- Select -->
+                        <select class="js-select2-custom" id="eventRepeatLabel"
+                                data-hs-select2-options='{
+                          "minimumResultsForSearch": "Infinity",
+                          "customClass": "custom-select custom-select-sm",
+                          "dropdownAutoWidth": true,
+                          "width": true
+                        }'>
+                            <option value="everyday" selected>Everyday</option>
+                            <option value="weekdays">Weekdays</option>
+                            <option value="never">Never</option>
+                        </select>
+                        <!-- End Select -->
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <div class="row form-group">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-group-senior nav-icon"></i>
+
+                            <div class="media-body">Guests</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="eventGestsLabel" class="sr-only">Add guests</label>
+
+                        <!-- Tagify -->
+                        <input class="tagify-form-control form-control" id="eventGestsLabel" placeholder="Add guests" aria-label="Add guests"
+                               data-hs-tagify-options='{
+                         "delimiters": null,
+                         "whitelist": [
+                           {
+                             "value": "Amanda Harvey",
+                             "src": ""
+                           },{
+                             "value": "David Harrison",
+                             "src": "./front-admin/assets/img/160x160/img3.jpg"
+                           }, {
+                             "value": "Finch Hoot",
+                             "src": "./front-admin/assets/img/160x160/img5.jpg"
+                           }, {
+                             "value": "Ella Lauda",
+                             "src": "./front-admin/assets/img/160x160/img9.jpg"
+                           }
+                         ],
+                         "dropdown": {
+                           "enabled": 0,
+                           "classname": "tagify__dropdown__menu"
+                         }
+                       }'>
+                        <!-- End Tagify -->
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <div class="row form-group">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-comment-video nav-icon"></i>
+
+                            <div class="media-body">Conference call</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <a class="btn btn-primary" href="#">
+                            <i class="tio-comment-video mr-1"></i> Add Zoom video conferencing
+                        </a>
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <div class="row form-group">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-poi nav-icon"></i>
+
+                            <div class="media-body">Location</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="eventLocationLabel" class="sr-only">Add location</label>
+
+                        <input type="text" class="form-control" id="eventLocationLabel" placeholder="Add location" aria-label="Add location">
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <div class="row form-group">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-text-left nav-icon"></i>
+
+                            <div class="media-body">Description</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <label for="eventDescriptionLabel" class="sr-only">Add description</label>
+
+                        <textarea id="eventDescriptionLabel" class="form-control" placeholder="Add description"></textarea>
+                    </div>
+                </div>
+                <!-- End Row -->
+
+                <div class="row">
+                    <div class="col-sm-3 mb-2 mb-sm-0">
+                        <div class="media align-items-center mt-2">
+                            <i class="tio-user-big-outlined nav-icon"></i>
+
+                            <div class="media-body">Created by</div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm">
+                        <!-- Media -->
+                        <a class="d-inline-flex align-items-center" href="user-profile.html">
+                            <div class="avatar avatar-sm avatar-circle mr-3">
+                                <img class="avatar-img" src="~/front-admin/assets/img/160x160/img6.jpg" alt="Image Description">
+                            </div>
+                            <div class="media-body"><span class="h5 text-hover-primary">Mark Williams</span></div>
+                        </a>
+                        <!-- End Media -->
+                    </div>
+                </div>
+                <!-- End Row -->
+            </div>
+            <!-- End Body -->
+            <!-- Footer -->
+            <div class="modal-footer">
+                <button type="button" id="discardFormt" class="btn btn-white" data-dismiss="modal">Discard</button>
+                <button type="button" id="processEvent" class="btn btn-primary">Create event</button>
+            </div>
+            <!-- End Footer -->
+        </div>
+    </div>
+</div>

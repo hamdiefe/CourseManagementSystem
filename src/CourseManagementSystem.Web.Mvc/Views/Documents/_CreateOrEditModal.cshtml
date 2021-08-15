@@ -1,0 +1,169 @@
+﻿@using CourseManagementSystem.Web.Models.Documents
+@using CourseManagementSystem.Web.Models.Common.Modals
+@using CourseManagementSystem.Models.Documents
+@using CourseManagementSystem.Models.Common
+
+@model CreateOrEditDocumentModalViewModel
+
+@{ var selectListType = Html.GetEnumSelectList(typeof(DocumentType));
+    foreach (var selectOption in selectListType) { selectOption.Text = L("Enum_DocumentType_" + selectOption.Value); }
+
+    var selectListSerie = Html.GetEnumSelectList(typeof(DocumentSerie));
+
+    var selectListCurrency = Html.GetEnumSelectList(typeof(Currency));
+    foreach (var selectOption in selectListCurrency) { selectOption.Text = L("Enum_Currency_" + selectOption.Value); }
+
+    var selectListStudent = new SelectList(Model.DocumentStudentList, "Id", "DisplayName", (Model.IsEditMode ? Model.Document.StudentId.ToString() : ""));
+}
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditDocument")) : L("CreateNewDocument")))
+
+<div class="modal-body">
+    <form name="DocumentInformationsForm">
+        @if (Model.IsEditMode)
+        {
+    <input type="hidden" name="id" value="@Model.Document.Id" />}
+        <div class="row form-group">
+            <label for="Document_Date" class="col-sm-3 col-form-label input-label">@L("Date")</label>
+
+            <div class="col-sm-9">
+                <div id="Document_DateDiv" class="js-flatpickr flatpickr-custom input-group input-group-merge"
+                     data-hs-flatpickr-options='{
+                              "appendTo": "#Document_DateDiv",
+                              "dateFormat": "d/m/Y",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")"
+                            }'>
+                    <input type="text" class="flatpickr-custom-form-control form-control"
+                           id="Document_Date" name="date" data-input value="@Model.Document.Date">
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_Type" class="col-sm-3 col-form-label input-label">@L("Type")</label>
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                            id="Document_Type" name="type" asp-for="@Model.Document.Type" asp-items="@selectListType"
+                            data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_Serie" class="col-sm-3 col-form-label input-label">@L("DocumentSerie")</label>
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                            id="Document_Serie" name="serie" asp-for="@Model.Document.Serie" asp-items="@selectListSerie"
+                            data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_No" class="col-sm-3 col-form-label input-label">@L("DocumentNo")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="number" class="form-control" name="no" id="Document_No"
+                           value="@Model.Document.No"
+                           required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_Description" class="col-sm-3 col-form-label input-label">@L("Description")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="description" id="Document_Description"
+                           maxlength="@CourseManagementSystem.Models.Documents.DocumentConsts.MaxDescrptionLength"
+                           minlength="@CourseManagementSystem.Models.Documents.DocumentConsts.MinDescrptionLength"
+                           value="@Model.Document.Description">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row form-group">
+            <label for="Document_Debt" class="col-sm-3 col-form-label input-label">@L("Debt")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" id="Document_Debt" class="form-control" name="debt" value="@Model.Document.Debt" placeholder="0.00" aria-label="0.00">
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_Credit" class="col-sm-3 col-form-label input-label">@L("Credit")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" id="Document_Credit" class="form-control" name="credit" value="@Model.Document.Credit" placeholder="0.00" aria-label="0.00">
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_Remaining" class="col-sm-3 col-form-label input-label">@L("Remaining")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" id="Document_Remaining" class="form-control" name="remaining" value="@Model.Document.Remaining" placeholder="0.00" aria-label="0.00">
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="Document_Currency" class="col-sm-3 col-form-label input-label">@L("Currency")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <div class="js-form-message input-group input-group-sm-down-break">
+                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                id="Document_Currency" name="currency" asp-for="@Model.Document.Currency" asp-items="@selectListCurrency"
+                                data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                            <option value="">@L("NonSelected") </option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="row form-group">
+            <label for="Document_StudentId" class="col-sm-3 col-form-label input-label">@L("Student")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <div class="js-form-message input-group input-group-sm-down-break">
+                        <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                                id="Document_StudentId" name="studentId" asp-for="@Model.Document.StudentId" asp-items="@selectListStudent"
+                                data-hs-select2-options='{
+                                "language": "@L("LibraryLocale")"
+                              }'>
+                            <option value="">@L("NonSelected") </option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+    </form>
+</div>
+<script src="~/view-resources/Views/Documents/_CreateOrEditModal.js" asp-append-version="true"></script>

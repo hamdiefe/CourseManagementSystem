@@ -1,0 +1,33 @@
+﻿@using CourseManagementSystem.Web.Models.ParentTypes
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model ParentTypeViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewParentType")))
+
+<div class="modal-body">
+    <div class="row form-group">
+        <label for="ParentType_Name" class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="name" id="ParentType_Name"
+                       value="@Model.ParentType.Name"
+                       readonly>
+            </div>
+        </div>
+    </div>
+    <div class="row form-group">
+        <label for="ParentType_Degree" class="col-sm-3 col-form-label input-label">@L("ParentDegree")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="degree" id="ParentType_Degree"
+                       value="@L("Enum_ParentDegree_" + (int)Model.ParentType.Degree)"
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithClose.cshtml")
+</div>

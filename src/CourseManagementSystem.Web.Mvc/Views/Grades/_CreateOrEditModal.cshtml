@@ -1,0 +1,29 @@
+﻿@using CourseManagementSystem.Web.Models.Grades
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model CreateOrEditGradeModalViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditGrade")) : L("CreateNewGrade")))
+
+<div class="modal-body">
+    <form name="GradeInformationsForm">
+        @if (Model.IsEditMode)
+        {
+<input type="hidden" name="id" value="@Model.Grade.Id" />}
+        <div class="row form-group">
+            <label for="Grade_Name" class="col-sm-3 col-form-label input-label">@L("GradeName")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="name" id="Grade_Name"
+                           value="@Model.Grade.Name"
+                           maxlength="@CourseManagementSystem.Models.Grades.GradeConsts.MaxNameLength" minlength="@CourseManagementSystem.Models.Grades.GradeConsts.MinNameLength"
+                           required>
+                </div>
+            </div>
+        </div>
+
+        @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+    </form>
+</div>
+<script src="~/view-resources/Views/Grades/_CreateOrEditModal.js" asp-append-version="true"></script>

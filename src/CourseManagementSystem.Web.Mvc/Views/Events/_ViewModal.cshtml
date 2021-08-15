@@ -1,0 +1,22 @@
+﻿@using CourseManagementSystem.Web.Models.Events
+@using CourseManagementSystem.Web.Models.Common.Modals
+@model EventViewModel
+
+
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("ViewEvent")))
+
+<div class="modal-body">
+    <div class="row form-group">
+        <label for="Event_Title" class="col-sm-3 col-form-label input-label">@L("Title")</label>
+
+        <div class="col-sm-9">
+            <div class="js-form-message input-group input-group-sm-down-break">
+                <input type="text" class="form-control" name="name" id="Event_Title"
+                       value="@Model.Event.Title"
+                       readonly>
+            </div>
+        </div>
+    </div>
+
+    @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithClose.cshtml")
+</div>

@@ -1,0 +1,34 @@
+﻿@using CourseManagementSystem.Services.MySettings.Dtos
+@model List<UserLoginAttemptDto>
+
+<div id="recentDevicesSection" class="card mb-3 mb-lg-5">
+    <div class="card-header">
+        <h4 class="card-title">@L("RecentUserLogins")</h4>
+    </div>
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-thead-bordered table-nowrap table-align-middle card-table">
+            <thead class="thead-light">
+                <tr>
+                    <th>@L("Date")</th>
+                    <th>@L("IpAddress")</th>
+                    <th>@L("Location")</th>
+                    <th>@L("Browser")</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var item in Model)
+                {
+                <tr>
+                    <td>@item.Date</td>
+                    <td>@item.ClientIpAddress</td>
+                    <td>@item.Location</td>
+                    <td>@item.BrowserInfo</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- End Table -->
+</div>

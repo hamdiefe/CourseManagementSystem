@@ -1,0 +1,322 @@
+﻿@using CourseManagementSystem.Web.Startup
+@model CourseManagementSystem.Web.Models.Roles.RoleListViewModel
+@{ ViewBag.Title = L("Roles");
+    ViewBag.CurrentPageName = PageNames.Roles; }
+@section scripts
+{
+    @*<environment names="Development">
+            <script src="~/view-resources/Views/Roles/Index.js" asp-append-version="true"></script>
+        </environment>
+
+        <environment names="Staging,Production">
+            <script src="~/view-resources/Views/Roles/Index.min.js" asp-append-version="true"></script>
+        </environment>*@
+
+    <script src="~/view-resources/Views/Roles/Index.js" asp-append-version="true"></script>
+
+}
+@section styles
+{
+   
+}
+
+<!-- Page Header -->
+<div class="page-header">
+    <div class="row align-items-center mb-3">
+        <div class="col-sm">
+            <h1 class="page-header-title">@L("Roles") <span class="badge badge-soft-dark ml-2">106,905</span></h1>
+
+            <div class="mt-2">
+                <a class="text-body mr-3" href="javascript:;" data-toggle="modal" data-target="#exportOrdersModal">
+                    <i class="tio-download-to mr-1"></i> Export
+                </a>
+
+                <!-- Unfold -->
+                <div class="hs-unfold">
+                    <a class="js-hs-unfold-invoker text-body" href="javascript:;"
+                       data-hs-unfold-options='{
+                       "target": "#moreOptionsDropdown",
+                       "type": "css-animation"
+                     }'>
+                        More options <i class="tio-chevron-down"></i>
+                    </a>
+
+                    <div id="moreOptionsDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu mt-1">
+                        <a class="dropdown-item" href="#">
+                            <i class="tio-folder-add dropdown-item-icon"></i> New order
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="tio-folder dropdown-item-icon"></i> New order - Development
+                        </a>
+                        <a class="dropdown-item" href="#">
+                            <i class="tio-folder dropdown-item-icon"></i> New order - Staging
+                        </a>
+                    </div>
+                </div>
+                <!-- End Unfold -->
+            </div>
+        </div>
+        <div class="col-sm-auto">
+            <a class="btn btn-primary" href="javascript:;" data-toggle="modal" data-target="#RoleCreateModal">@L("CreateNewRole")</a>
+        </div>
+    </div>
+    <!-- End Row -->
+    <!-- Nav Scroller -->
+    <div class="js-nav-scroller hs-nav-scroller-horizontal">
+        <span class="hs-nav-scroller-arrow-prev" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+                <i class="tio-chevron-left"></i>
+            </a>
+        </span>
+
+        <span class="hs-nav-scroller-arrow-next" style="display: none;">
+            <a class="hs-nav-scroller-arrow-link" href="javascript:;">
+                <i class="tio-chevron-right"></i>
+            </a>
+        </span>
+
+        <!-- Nav -->
+        <ul class="nav nav-tabs page-header-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">All products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Open</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Unfulfilled</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Unpaid</a>
+            </li>
+        </ul>
+        <!-- End Nav -->
+    </div>
+    <!-- End Nav Scroller -->
+</div>
+<!-- End Page Header -->
+<!-- Card -->
+<div class="card">
+    <!-- Header -->
+    <div class="card-header">
+        <div class="row justify-content-between align-items-center flex-grow-1">
+            <div class="col-lg-6 mb-3 mb-lg-0">
+                <form>
+                    <!-- Search -->
+                    <div class="input-group input-group-merge input-group-flush">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="tio-search"></i>
+                            </div>
+                        </div>
+                        <input id="datatableSearch" type="search" class="form-control" placeholder="@L("SearchWithThreeDot")" aria-label="@L("SearchWithThreeDot")">
+                    </div>
+                    <!-- End Search -->
+                </form>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="d-sm-flex justify-content-sm-end align-items-sm-center">
+                    <!-- Datatable Info -->
+                    <div id="datatableCounterInfo" class="mr-2 mb-2 mb-sm-0" style="display: none;">
+                        <div class="d-flex align-items-center">
+                            <span class="font-size-sm mr-3">
+                                <span id="datatableCounter">0</span>
+                                @L("RowSelected")
+                            </span>
+                            <a class="btn btn-sm btn-outline-danger" href="javascript:;">
+                                <i class="tio-delete-outlined"></i> @L("Delete")
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Datatable Info -->
+                    <!-- Unfold -->
+                    <div class="hs-unfold mr-2">
+                        <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle" href="javascript:;"
+                           data-hs-unfold-options='{
+                         "target": "#DownloadDropdown",
+                         "type": "css-animation"
+                       }'>
+                            <i class="tio-download-to mr-1"></i> @L("Download")
+                        </a>
+
+                        <div id="DownloadDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
+                            <a id="export-excel" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/brands/excel.svg" alt="Image Description">
+                                Excel
+                            </a>
+                            <a id="export-csv" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/components/placeholder-csv-format.svg" alt="Image Description">
+                                .CSV
+                            </a>
+                            <a id="export-pdf" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/brands/pdf.svg" alt="Image Description">
+                                PDF
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Unfold -->
+                    <!-- Unfold -->
+                    <div class="hs-unfold mr-2">
+                        <a class="js-hs-unfold-invoker btn btn-sm btn-white dropdown-toggle" href="javascript:;"
+                           data-hs-unfold-options='{
+                         "target": "#OptionsDropdown",
+                         "type": "css-animation"
+                       }'>
+                            <i class="tio-download-to mr-1"></i> @L("Options")
+                        </a>
+
+                        <div id="OptionsDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-sm-right">
+                            <a id="export-copy" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/illustrations/copy.svg" alt="Image Description">
+                                @L("Copy")
+                            </a>
+                            <a id="export-print" class="dropdown-item" href="javascript:;">
+                                <img class="avatar avatar-xss avatar-4by3 mr-2" src="~/front-admin/assets/svg/illustrations/print.svg" alt="Image Description">
+                                @L("Print")
+                            </a>
+                        </div>
+                    </div>
+                    <!-- End Unfold -->
+                    <!-- Unfold -->
+                    <div class="hs-unfold">
+                        <a class="js-hs-unfold-invoker btn btn-sm btn-white" href="javascript:;"
+                           data-hs-unfold-options='{
+                         "target": "#showHideDropdown",
+                         "type": "css-animation"
+                       }'>
+                            <i class="tio-table mr-1"></i> @L("Columns") <span class="badge badge-soft-dark rounded-circle ml-1">7</span>
+                        </a>
+
+                        <div id="showHideDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right dropdown-card" style="width: 15rem;">
+                            <div class="card card-sm">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("RoleName")</span>
+
+                                        <!-- Checkbox Switch -->
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_name">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_name" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                        <!-- End Checkbox Switch -->
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="mr-2">@L("DisplayName")</span>
+
+                                        <!-- Checkbox Switch -->
+                                        <label class="toggle-switch toggle-switch-sm" for="toggleColumn_displayName">
+                                            <input type="checkbox" class="toggle-switch-input" id="toggleColumn_displayName" checked>
+                                            <span class="toggle-switch-label">
+                                                <span class="toggle-switch-indicator"></span>
+                                            </span>
+                                        </label>
+                                        <!-- End Checkbox Switch -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Unfold -->
+                </div>
+            </div>
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Header -->
+    <!-- Table -->
+    <div class="table-responsive datatable-custom">
+        <table id="datatable" class="table table-hover table-borderless table-thead-bordered table-nowrap table-align-middle card-table" style="width: 100%"
+               data-hs-datatables-options='{
+                     "columnDefs": [{
+                        "targets": [0],
+                        "orderable": false
+                      }],
+                     "order": [],
+                     "info": {
+                       "totalQty": "#datatableWithPaginationInfoTotalQty"
+                     },
+                     "search": "#datatableSearch",
+                     "entries": "#datatableEntries",
+                     "pageLength": 12,
+                     "isResponsive": false,
+                     "isShowPaging": false,
+                     "pagination": "datatablePagination"
+                   }'>
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col" class="table-column-pr-0">
+                        <div class="custom-control custom-checkbox">
+                            <input id="datatableCheckAll" type="checkbox" class="custom-control-input">
+                            <label class="custom-control-label" for="datatableCheckAll"></label>
+                        </div>
+                    </th>
+                    <th>@L("RoleName")</th>
+                    <th>@L("DisplayName")</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <!-- End Table -->
+    <!-- Footer -->
+    <div class="card-footer">
+        <!-- Pagination -->
+        <div class="row justify-content-center justify-content-sm-between align-items-sm-center">
+            <div class="col-sm mb-2 mb-sm-0">
+                <div class="d-flex justify-content-center justify-content-sm-start align-items-center">
+                    <span class="mr-2">@L("Showing"):</span>
+
+                    <!-- Select -->
+                    <select id="datatableEntries" class="js-select2-custom"
+                            data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "customClass": "custom-select custom-select-sm custom-select-borderless",
+                            "dropdownAutoWidth": true,
+                            "width": true
+                          }'>
+                        <option value="10" selected>10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <!-- End Select -->
+
+                    <span class="text-secondary mr-2">/</span>
+
+                    <!-- Pagination Quantity -->
+                    <span id="datatableWithPaginationInfoTotalQty"></span>
+                </div>
+            </div>
+
+            <div class="col-sm-auto">
+                <div class="d-flex justify-content-center justify-content-sm-end">
+                    <!-- Pagination -->
+                    <nav id="datatablePagination" aria-label="Activity pagination"></nav>
+                </div>
+            </div>
+        </div>
+        <!-- End Pagination -->
+    </div>
+    <!-- End Footer -->
+</div>
+<!-- End Card -->
+
+@await Html.PartialAsync("~/Views/Roles/_CreateModal.cshtml", Model)
+
+<div class="modal fade" id="RoleEditModal" tabindex="-1" role="dialog" aria-labelledby="RoleEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+
+        </div>
+    </div>
+</div>
+
+
+

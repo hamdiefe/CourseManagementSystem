@@ -1,0 +1,118 @@
+﻿@using Abp.Authorization.Users
+@using CourseManagementSystem.Web.Models.Common.Modals
+@using CourseManagementSystem.Web.Models.Users
+@model UserListViewModel
+@{
+    Layout = null;
+
+}
+<div class="modal fade" id="UserCreateModal" tabindex="-1" role="dialog" aria-labelledby="UserCreateModalLabel" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <form name="userCreateForm" role="form" class="form-horizontal">
+                @await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(L("CreateNewUser")))
+                <div class="modal-body">
+                    <ul class="js-tabs-to-dropdown nav nav-segment nav-fill nav-lg-down-break mb-5" id="CreateOrEditUserModalTab" role="tablist"
+                        data-hs-transform-tabs-to-btn-options='{
+                  "transformResolution": "lg",
+                  "btnClassNames": "btn btn-block btn-white dropdown-toggle justify-content-center mb-3"
+                }'>
+                        <li class="nav-item">
+                            <a class="nav-link active" id="userDetails-section-tab" data-toggle="tab" href="#userDetails-section" role="tab">
+                                <i class="tio-user-outlined mr-1"></i> @L("UserDetails")
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="userRoles-section-tab" data-toggle="tab" href="#userRoles-section" role="tab">
+                                <i class="tio-lock-outlined mr-1"></i> @L("UserRoles")
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="CreateOrEditUserModalTabContent">
+                        <div class="tab-pane fade show active" id="userDetails-section" role="tabpanel" aria-labelledby="userDetails-section-tab">
+                            <div class="row form-group">
+                                <label class="col-sm-3 col-form-label input-label">@L("UserName")</label>
+
+                                <div class="col-sm-9">
+                                    <div class="js-form-message input-group input-group-sm-down-break">
+                                        <input type="text" class="js-masked-input form-control" name="userName" required maxlength="@AbpUserBase.MaxUserNameLength" minlength="2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+                                <div class="col-sm-9">
+                                    <div class="js-form-message input-group input-group-sm-down-break">
+                                        <input type="text" class="js-masked-input form-control" name="name" required maxlength="@AbpUserBase.MaxNameLength" minlength="2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 col-form-label input-label">@L("Surname")</label>
+
+                                <div class="col-sm-9">
+                                    <div class="js-form-message input-group input-group-sm-down-break">
+                                        <input type="text" class="js-masked-input form-control" name="surname" required maxlength="@AbpUserBase.MaxSurnameLength" minlength="2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 col-form-label input-label">@L("EmailAddress")</label>
+
+                                <div class="col-sm-9">
+                                    <div class="js-form-message input-group input-group-sm-down-break">
+                                        <input type="email" class="js-masked-input form-control" name="emailAddress" required maxlength="@AbpUserBase.MaxEmailAddressLength" minlength="2">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 col-form-label input-label">@L("Password")</label>
+
+                                <div class="col-sm-9">
+                                    <div class="js-form-message input-group input-group-sm-down-break">
+                                        <input type="password" class="js-masked-input form-control" name="password" id="Password" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <label class="col-sm-3 col-form-label input-label">@L("ConfirmPassword")</label>
+
+                                <div class="col-sm-9">
+                                    <div class="js-form-message input-group input-group-sm-down-break">
+                                        <input type="password" class="js-masked-input form-control" name="confirmPassword" id="ConfirmPassword" required maxlength="@AbpUserBase.MaxPlainPasswordLength">
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <label class="row form-group toggle-switch" for="CreateUserIsActive">
+                                <span class="col-8 col-sm-9 toggle-switch-content ml-0">
+                                    <span class="d-block text-dark mb-1">@L("IsActive")</span>
+                                </span>
+                                <span class="col-4 col-sm-3">
+                                    <input type="checkbox" name="isActive" class="toggle-switch-input" id="CreateUserIsActive" value="true" checked>
+
+                                    <span class="toggle-switch-label ml-auto">
+                                        <span class="toggle-switch-indicator"></span>
+                                    </span>
+                                </span>
+                            </label>
+                            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+                        </div>
+                        <div class="tab-pane fade" id="userRoles-section" role="tabpanel" aria-labelledby="userRoles-section-tab">
+                            @foreach (var role in Model.Roles)
+                            {
+                                <div class="col-md-6">
+                                    <input type="checkbox" name="role" id="role-@role.Id" value="@role.NormalizedName" title="@role.Description" />
+                                    <label for="role-@role.Id" title="@role.DisplayName">@role.Name</label>
+                                </div>
+                            }
+
+                            @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

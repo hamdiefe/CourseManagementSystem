@@ -1,0 +1,47 @@
+﻿@using CourseManagementSystem.Web.Models.Students
+@using CourseManagementSystem.Models.Common
+
+@model AddStudentParentFieldViewModel
+
+
+<div class="parent-container">
+    <div class="js-form-message input-group input-group-sm-down-break">
+        <a class="media align-items-center" href="javascript:;" data-toggle="modal" data-target="#CreateOrEditParentModal" name="editParent">
+            @if (Model.Parent.Gender == Gender.Male)
+            {
+                <div class="avatar avatar-soft-primary avatar-circle  mr-3">
+                    <span class="avatar-initials">@Model.Parent.Name.Substring(0, 1)</span>
+                </div>
+            }
+            @if (Model.Parent.Gender == Gender.Female)
+            {
+                <div class="avatar avatar-soft-danger avatar-circle  mr-3">
+                    <span class="avatar-initials">@Model.Parent.Name.Substring(0, 1)</span>
+                </div>
+            }
+            @if (Model.Parent.Gender == Gender.NonSelected)
+            {
+                <div class="avatar avatar-soft-warning avatar-circle  mr-3">
+                    <span class="avatar-initials">@Model.Parent.Name.Substring(0, 1)</span>
+                </div>
+            }
+
+            <div class="media-body">
+                @if (Model.ParentTypeName != null)
+                {
+                    <span class="text-body text-hover-primary">@Model.Parent.Name @Model.Parent.Surname (@Model.ParentTypeName)</span>
+                }
+                else
+                {
+                    <span class="text-body text-hover-primary">@Model.Parent.Name @Model.Parent.Surname</span>
+                }
+                <input type="hidden" name="parentId" value="@Model.Parent.Id">
+            </div>
+        </a>
+        <a class="js-delete-field js-delete-field input-group-add-field-delete delete-parent" style="opacity: 1" href="javascript:;">
+            <i class="tio-clear"></i>
+        </a>
+    </div>
+    <hr />
+</div>
+<script src="~/view-resources/Views/Students/_AddParentField.js" asp-append-version="true"></script>

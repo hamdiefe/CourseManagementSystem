@@ -1,0 +1,23 @@
+﻿@using CourseManagementSystem.Web.Views.Shared.Components.RightNavbarLanguageSwitch
+@model RightNavbarLanguageSwitchViewModel
+
+<li class="nav-item dropdown" style="list-style-type:none;">
+    <a href="javascript:void(0);" class="nav-link" data-toggle="dropdown" role="button">
+        <img class="avatar avatar-xss avatar-circle mr-2" src="~/front-admin/assets/vendor/flag-icon-css/flags/1x1/@Model.CurrentLanguage.Icon" alt="@Model.CurrentLanguage.DisplayName">
+        <span class="d-none d-md-inline-block login-color-white">@Model.CurrentLanguage.DisplayName</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right p-0">
+        @foreach (var languageInfo in Model.Languages)
+        {
+            if (languageInfo.Name != Model.CurrentLanguage.Name)
+            {
+        <a class="dropdown-item" href="@Url.Action("ChangeCulture", "AbpLocalization", new {
+                                                  cultureName = languageInfo.Name,
+                                                  returnUrl = Context.Request.Path + Context.Request.QueryString
+                                              })">
+            <img class="avatar avatar-xss avatar-circle mr-2" src="~/front-admin/assets/vendor/flag-icon-css/flags/1x1/@languageInfo.Icon" alt="@languageInfo.DisplayName">@languageInfo.DisplayName
+        </a>
+            }
+        }
+    </div>
+</li>

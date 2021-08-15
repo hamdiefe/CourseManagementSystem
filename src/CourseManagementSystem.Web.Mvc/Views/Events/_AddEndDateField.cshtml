@@ -1,0 +1,72 @@
+﻿@using CourseManagementSystem.Web.Models.Events
+@model AddEventEndDateFieldViewModel
+@{ var guid = Guid.NewGuid();}
+
+
+@if (Model.SelectedEndDate == null)
+{
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label"></label>
+        <div class="col-sm-9">
+            <small class="form-text" style="display:none;">@L("EndDate")</small>
+
+            <div class="row js-form-message input-group input-group-sm-down-break align-items-center" style="margin: 0px !important;">
+                <div id="Event_EndDate_@guid" class="js-flatpickr-@guid flatpickr-custom input-group input-group-merge"
+                     data-hs-flatpickr-options='{
+                              "appendTo": "#Event_EndDate_@guid",
+                              "dateFormat": "d/m/Y H:i",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")",
+                              "enableTime": true,
+                              "minDate":"@Model.MinDate",
+                              "time_24hr": true
+                     }'>
+                    <input type="text" class="flatpickr-custom-form-control form-control"
+                           id="Event_EndDate" name="endDate" data-input value="" placeholder="@L("EndDate")">
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label"></label>
+        <div class="col-sm-9">
+            <small class="form-text">@L("EndDate")</small>
+
+            <div class="row js-form-message input-group input-group-sm-down-break align-items-center" style="margin: 0px !important;">
+                <div id="Event_EndDate_@guid" class="js-flatpickr-@guid flatpickr-custom input-group input-group-merge"
+                     data-hs-flatpickr-options='{
+                              "appendTo": "#Event_EndDate_@guid",
+                              "dateFormat": "d/m/Y H:i",
+                              "wrap": true,
+                              "locale" :"@L("LibraryLocale")",
+                              "enableTime": true,
+                              "minDate":"@Model.MinDate",
+                              "time_24hr": true
+                     }'>
+                    <input type="text" class="flatpickr-custom-form-control form-control"
+                           id="Event_EndDate_@guid" name="endDate" data-input value="@Model.SelectedEndDate" placeholder="@L("EndDate")">
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+<script>
+    $(document).ready(function () {
+        var _$eventTabContent = $("#CreateOrEditEventModalTabContent");
+        var _$eventForm = _$eventTabContent.find('form');
+        //Flatpckr
+        _$eventForm.find('.js-flatpickr-@guid').each(function () {
+            $.HSCore.components.HSFlatpickr.init(_$eventForm.find(this));
+        });
+    });
+</script>
+
+
+<script src="~/view-resources/Views/Events/_AddEndDateField.js" asp-append-version="true"></script>

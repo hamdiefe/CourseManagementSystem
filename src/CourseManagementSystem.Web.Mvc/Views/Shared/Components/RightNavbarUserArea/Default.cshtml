@@ -1,0 +1,59 @@
+﻿@model CourseManagementSystem.Web.Views.Shared.Components.RightNavbarUserArea.RightNavbarUserAreaViewModel
+          <!-- Account -->
+<div class="hs-unfold">
+    <a class="js-hs-unfold-invoker navbar-dropdown-account-wrapper" href="javascript:;"
+       data-hs-unfold-options='{
+                 "target": "#accountNavbarDropdown",
+                 "type": "css-animation"
+               }'>       
+        <div class="avatar avatar-sm avatar-circle">
+            @if (Model.Profile.ProfileImage == null || Model.Profile.ProfileImage == "")
+            {
+                <img id="" class="avatar-img" src="~/front-admin/assets/svg/logos/logo-short.svg" alt="@Model.Profile.ProfileImage">
+            }
+            else
+            {
+                <img id="" class="avatar-img" src="~/img/profile-img/@Model.Profile.ProfileImage" alt="@Model.Profile.ProfileImage">
+            }
+            <span class="avatar-status avatar-sm-status avatar-status-success"></span>
+        </div>
+    </a>
+
+    <div id="accountNavbarDropdown" class="hs-unfold-content dropdown-unfold dropdown-menu dropdown-menu-right navbar-dropdown-menu navbar-dropdown-account" style="width: 16rem;">
+        <div class="dropdown-item-text">
+            <div class="media align-items-center" style="min-width:220px;">
+                <div class="avatar avatar-sm avatar-circle mr-2">
+                    @if (Model.Profile.ProfileImage == null || Model.Profile.ProfileImage == "")
+                    {
+                        <img id="" class="avatar-img" src="~/front-admin/assets/svg/logos/logo-short.svg" alt="@Model.Profile.ProfileImage">
+                    }
+                    else
+                    {
+                        <img id="" class="avatar-img" src="~/img/profile-img/@Model.Profile.ProfileImage" alt="@Model.Profile.ProfileImage">
+                    }
+                </div>
+                <div class="media-body">
+                    <span class="card-title h5">@Model.LoginInformations.User.Name @Model.LoginInformations.User.Surname</span>
+                    <span class="card-text">@Model.LoginInformations.User.EmailAddress</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dropdown-divider"></div>
+
+        <a class="dropdown-item" href="/MySettings">
+            <span class="text-truncate pr-2" title="@L("MySettings")">@L("MySettings")</span>
+        </a>
+
+        <a class="dropdown-item" href="/AuditLogs">
+            <span class="text-truncate pr-2" title="@L("AuditLogs")">@L("AuditLogs")</span>
+        </a>
+
+        <div class="dropdown-divider"></div>
+
+        <a class="dropdown-item" href="/Account/Logout">
+            <span class="text-truncate pr-2" title="@L("Logout")">@L("Logout")</span>
+        </a>
+    </div>
+</div>
+<!-- End Account -->

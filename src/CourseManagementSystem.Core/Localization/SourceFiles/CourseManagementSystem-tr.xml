@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="tr">
+  <texts>
+    <text name="Status" value="Durum" />
+    <text name="Enum_EventStatus_2" value="Tamamlanmadı" />
+    <text name="Enum_EventStatus_1" value="Tamamlandı" />
+    <text name="Enum_EventStatus_0" value="Seçilmedi" />
+    <text name="RepeatWeekCountDescription" value="Etkinlik, buraya yazacağınız hafta sayısı kadar otomatik olarak tekrar edecektir."></text>
+    <text name="RepeatWeekCount" value="Tekrar edecek hafta sayısı"></text>
+    <text name="RefreshPayments" value="Ödemeleri Güncelle" />
+
+    <text name="Enum_DocumentType_2" value="Banka Transferi" />
+    <text name="Enum_DocumentType_1" value="Hizmet Faturası" />
+    <text name="Enum_DocumentType_0" value="Nakit Ödeme" />
+    <text name="Currency" value="Para Birimi" />
+    <text name="DocumentSerie" value="Belge Seri" />
+    <text name="DocumentNo" value="Belge No" />
+    <text name="Debt" value="Borç" />
+    <text name="Credit" value="Alacak" />
+    <text name="Remaining" value="Kalan" />
+
+    <text name="ViewDocument" value="Belge Görüntüle" />
+    <text name="EditDocument" value="Belge Düzenle" />
+    <text name="CreateNewDocument" value="Yeni Belge Oluştur" />
+    <text name="Document">Belge</text>
+    <text name="Documents">Belgeler</text>
+    <text name="Accounting">Muhasebe</text>
+    
+    <text name="TotalHours" value="Toplam Saat" />
+    <text name="Type" value="Tür" />
+    <text name="Enum_EventType_1" value="Ödeme" />
+    <text name="Enum_EventType_0" value="Ders" />
+    <text name="SaveProfileImage" value="Profil Resmini Kaydet" />
+    <text name="Location" value="Konum" />
+    <text name="EnsureThatTheseRequirementsAreMet" value="Bu gereksinimlerin karşılandığından emin olun" />
+    <text name="MinimumEightCharactersLong" value="En az 8 karakter uzunluğunda olmalıdır." />
+    <text name="AtLeastOneLowercaseCharacter" value="En az bir küçük harf içermelidir." />
+    <text name="AtLeastOneUppercaseCharacter" value="En az bir büyük harf içermelidir." />
+    <text name="AtLeastOneNumberCharacter" value="En az bir sayı içermelidir." />
+    <text name="PasswordRequirements" value="Parola Gereksinimleri" />
+    <text name="Languages" value="Diller" />
+    <text name="Language" value="Dil" />
+    <text name="DeleteYourAccount" value="Hesabını Sil" />
+    <text name="DeleteYourAccountDescription" value="Hesabınız silinmesi işlemi için lütfen sistem yöneticisi ile iletişime geçiniz." />
+    <text name="RecentUserLogins" value="Son Kullanıcı Girişleri" />
+    <text name="BasicInformations" value="Temel Bilgiler" />
+    <text name="ProfileImageSaved" value="Profil resmi başarıyla kaydedildi." />
+    <text name="BasicInformationsSaved" value="Temel bilgiler başarıyla kaydedildi." />
+    <text name="PasswordSaved" value="Şifre başarıyla kaydedildi." />
+    <text name="MySettings" value="Ayarlarım" />
+    <text name="Browser" value="Tarayıcı" />
+    <text name="IpAddress" value="Ip Adres" />
+    <text name="Exception" value="Sıra Dışı Durum" />
+    <text name="Parameters" value="Parametreler" />
+    <text name="Method" value="Metot" />
+    <text name="Service" value="Hizmet" />
+    <text name="ExecutionTime" value="Uygulanma Zamanı" />
+    <text name="ExecutionDuration" value="Uygulanma Süresi" />
+    <text name="User" value="Kullanıcı" />
+    <text name="ViewAuditLog" value="Denetim Günlüğü Görüntüle" />
+    <text name="AuditLogs" value="Denetim Günlükleri" />
+    
+    <text name="Disabled">Devre Dışı</text>
+    <text name="Container">Konteyner</text>
+    <text name="DoubleLine">Çift Satır</text>
+    <text name="Fluid">Akışkan</text>
+    <text name="Mini">Mini</text>
+    <text name="Compact">Kompakt</text>
+    <text name="Default">Varsayılan</text>
+    <text name="Dark">Koyu</text>
+    <text name="Light">Açık</text>
+    <text name="Skin">Görünüm</text>
+    <text name="Skins">Görünümler</text>
+    <text name="Header">Üst Kısım</text>
+    <text name="Sidebar">Kenar Çubuğu</text>
+    <text name="CustomizePageLayout">Sayfa düzeninini özelleştirin.</text>
+    <text name="Reset">Sıfırla</text>
+    <text name="Apply">Uygula</text>
+    <text name="ForgotPassword">Şifremi Unuttum</text>
+    <text name="ConfirmPassword">Şifreyi Onayla</text>
+    <text name="Definitions" value="Tanımlamalar" />
+    <text name="hour" value="saat" />
+    <text name="Hour" value="Saat" />
+    <text name="EventTypes" value="Etkinlik Türleri" />
+    <text name="Payment" value="Ödeme" />
+    <text name="Class" value="Ders" />
+    <text name="Filter" value="Filtrele" />
+    <text name="HourlyPaymentPeriod" value="Saatlik Ödeme Periyodu" />
+    <text name="HourlyPaymentAmount" value="Saatlik Ödeme Tutarı" />
+    <text name="Enum_Currency_0" value="TRY" />
+    <text name="Active" value="Aktif" />
+
+    <text name="Next" value="Sonraki" />
+    <text name="Previous" value="Önceki" />
+    <text name="Month" value="Ay" />
+    <text name="Week" value="Hafta" />
+    <text name="Day" value="Gün" />
+    <text name="List" value="Liste" />
+    <text name="SearchByTitle" value="Başlığa göre ara" />
+    <text name="Today" value="Bugün" />
+
+    <text name="With" value="ile" />
+    <text name="Between" value="arası" />
+    <text name="AtLeastOneDateMustBeEntered" value="Ena az bir tarih girilmesi zorunludur." />
+
+    <text name="ViewEvent" value="Etkinlik Görüntüle" />
+    <text name="EditEvent" value="Etkinlik Düzenle" />
+    <text name="CreateNewEvent" value="Yeni Etkinlik Oluştur" />
+    <text name="Event" value="Etkinlik" />
+    <text name="Events" value="Etkinlikler" />
+
+    <text name="AddDate" value="Tarih Ekle" />
+    <text name="EndDate" value="Bitiş Tarihi" />
+    <text name="StartDate" value="Başlangıç Tarihi" />
+    <text name="Date" value="Tarih" />
+    <text name="Title" value="Başlık" />
+    <text name="Calendar" value="Takvim" />
+
+    <text name="Enum_SpecializedField_5" value="İngilizce" />
+    <text name="Enum_SpecializedField_4" value="Fen Bilgisi" />
+    <text name="Enum_SpecializedField_3" value="Sosyal Bilgiler" />
+    <text name="Enum_SpecializedField_2" value="Matematik" />
+    <text name="Enum_SpecializedField_1" value="Türkçe" />
+    <text name="Enum_SpecializedField_0" value="Seçilmedi" />
+
+    <text name="AddSpecializedField" value="Branş Ekle" />
+    <text name="SpecializedField" value="Branş" />
+    <text name="GraduationSchool" value="Mezun Olduğu Okul" />
+
+    <text name="ViewTeacher" value="Öğretmen Görüntüle" />
+    <text name="EditTeacher" value="Öğretmen Düzenle" />
+    <text name="CreateNewTeacher" value="Yeni Öğretmen Oluştur" />
+    <text name="Teacher" value="Öğretmen" />
+    <text name="Teachers" value="Öğretmenler" />
+
+    <text name="AddParent" value="Veli Ekle" />
+
+    <text name="Enum_EducationalStatus_7" value="Doktora" />
+    <text name="Enum_EducationalStatus_6" value="Yüksek Lisans" />
+    <text name="Enum_EducationalStatus_5" value="Lisans" />
+    <text name="Enum_EducationalStatus_4" value="Ön Lisans" />
+    <text name="Enum_EducationalStatus_3" value="Lise" />
+    <text name="Enum_EducationalStatus_2" value="Ortaokul" />
+    <text name="Enum_EducationalStatus_1" value="İlkokul" />
+    <text name="Enum_EducationalStatus_0" value="Seçilmedi" />
+    <text name="EducationalStatus" value="Eğitim Durumu" />
+
+    <text name="Enum_ParentDegree_3" value="Diğer" />
+    <text name="Enum_ParentDegree_2" value="Üçüncü Derece" />
+    <text name="Enum_ParentDegree_1" value="İkinci Derece" />
+    <text name="Enum_ParentDegree_0" value="Birinci Derece" />
+    <text name="ParentDegree" value="Yakınlık Derecesi" />
+    <text name="ViewParentType" value="Veli Türü Görüntüle" />
+    <text name="EditParentType" value="Veli Türü Düzenle" />
+    <text name="CreateNewParentType" value="Yeni Veli Türü Oluştur" />
+    <text name="ParentType" value="Veli Türü" />
+    <text name="ParentTypes" value="Veli Türleri" />
+
+    <text name="Description">Açıklama</text>
+
+    <text name="ViewParent" value="Veli Görüntüle" />
+    <text name="EditParent" value="Veli Düzenle" />
+    <text name="CreateNewParent" value="Yeni Veli Oluştur" />
+    <text name="Parent" value="Veli" />
+    <text name="Parents" value="Veliler" />
+
+    <text name="ViewJob" value="Meslek Görüntüle" />
+    <text name="EditJob" value="Meslek Düzenle" />
+    <text name="CreateNewJob" value="Yeni Meslek Oluştur" />
+    <text name="Job">Meslek</text>
+    <text name="Jobs">Meslekler</text>
+
+    <text name="ThisFieldRequired">Bu alanın doldurulması zorunludur.</text>
+    <text name="CheckThe{0}">{0} alanını kontrol edin.</text>
+    <text name="{0}IsRequired">{0} zorunludur.</text>
+
+    <text name="Enum_AddressType_1" value="İş" />
+    <text name="Enum_AddressType_0" value="Ev" />
+    <text name="AddressContinue" value="Adres Devamı" />
+    <text name="Address" value="Adres" />
+    <text name="AddAddress" value="Adres Ekle" />
+
+    <text name="GeneralInformations" value="Genel Bilgiler" />
+    <text name="IdentityNumberCouldNotVerify" value="Kimlik Numarası Doğrulanamadı" />
+
+    <text name="Enum_PhoneType_3" value="Faks" />
+    <text name="Enum_PhoneType_2" value="İş" />
+    <text name="Enum_PhoneType_1" value="Ev" />
+    <text name="Enum_PhoneType_0" value="Mobil" />
+    <text name="Phone" value="Telefon" />
+    <text name="AddPhone" value="Telefon Ekle" />
+
+    <text name="NonSelected" value="Seçilmedi" />
+    <text name="PickTown" value="İlçe Seç" />
+    <text name="PickCity" value="İl Seç" />
+    <text name="PickCountry" value="Ülke Seç" />
+    <text name="Pick" value="Seç" />
+    <text name="Age" value="Yaş" />
+    <text name="LibraryLocale" value="tr" />
+
+    <text name="Enum_Gender_2" value="Kadın" />
+    <text name="Enum_Gender_1" value="Erkek" />
+    <text name="Enum_Gender_0" value="Seçilmedi" />
+
+    <text name="StudentNumber" value="Öğrenci Numarası" />
+    <text name="BirthPlace" value="Doğum Yeri" />
+    <text name="Email" value="E-posta" />
+    <text name="BirthDate" value="Doğum Tarihi" />
+    <text name="Gender" value="Cinsiyet" />
+    <text name="IdentityNumber" value="Kimlik Numarası" />
+
+    <text name="ViewStudent" value="Öğrenci Görüntüle" />
+    <text name="EditStudent" value="Öğrenci Düzenle" />
+    <text name="CreateNewStudent" value="Yeni Öğrenci Oluştur" />
+    <text name="Student" value="Öğrenci" />
+    <text name="Students" value="Öğrenciler" />
+
+    <text name="Enum_SchoolType_5" value="Üniversite" />
+    <text name="Enum_SchoolType_4" value="Lise" />
+    <text name="Enum_SchoolType_3" value="Ortaokul" />
+    <text name="Enum_SchoolType_2" value="İlkokul" />
+    <text name="Enum_SchoolType_1" value="Anaokulu" />
+    <text name="Enum_SchoolType_0" value="Seçilmedi" />
+    <text name="SchoolType" value="Okul Türü" />
+    <text name="SchoolName" value="Okul Adı" />
+    <text name="ViewSchool" value="Okul Görüntüle" />
+    <text name="EditSchool" value="Okul Düzenle" />
+    <text name="CreateNewSchool" value="Yeni Okul Oluştur" />
+    <text name="School" value="Okul" />
+    <text name="Schools" value="Okullar" />
+
+    <text name="GradeName" value="Sınıf Adı" />
+    <text name="ViewGrade" value="Sınıf Görüntüle" />
+    <text name="EditGrade" value="Sınıf Düzenle" />
+    <text name="CreateNewGrade" value="Yeni Sınıf Oluştur" />
+    <text name="Grade" value="Sınıf" />
+    <text name="Grades" value="Sınıflar" />
+
+    <text name="Export" value="Dışa Aktar" />
+    <text name="View" value="Görüntüle" />
+    <text name="Close" value="Kapat" />
+    <text name="NoDataToShow" value="Görüntülenecek Veri Yok" />
+    <text name="Appearance" value="Görünüm" />
+    <text name="Showing" value="Gösteriliyor" />
+    <text name="RowSelected" value="Satır Seçildi" />
+    <text name="Copy" value="Kopyala" />
+    <text name="Print" value="Yazdır" />
+    <text name="Download" value="İndir" />
+    <text name="Options" value="Seçenekler" />
+    <text name="DownloadOptions" value="İndirme Seçenekleri" />
+    <text name="Columns" value="Sütunlar" />
+    <text name="CreateNewRole" value="Yeni Rol Oluştur" />
+    <text name="HomePage" value="Ana Sayfa" />
+    <text name="About" value="Hakkında" />
+    <text name="WelcomeMessage" value="CourseManagementSystem projesine hoşgeldiniz!" />
+    <text name="FormIsNotValidMessage" value="Form geçerli değil. Lütfen kontrol edip hataları düzeltin." />
+    <text name="TenantNameCanNotBeEmpty" value="Müşteri adı boş bırakılamaz." />
+    <text name="InvalidUserNameOrPassword" value="Kullanıcı adı ya da şifre hatalı." />
+    <text name="ThereIsNoTenantDefinedWithName{0}" value="{0} isminde bir müşteri tanımlı değildir." />
+    <text name="TenantIsNotActive" value="{0} isimli müşteri aktif edilmemiştir." />
+    <text name="UserIsNotActiveAndCanNotLogin" value="{0} isimli kullanıcı pasife alınmıştır ve sisteme giremez." />
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin">E-posta adresiniz doğrulanmadı, giriş yapamazsınız.</text>
+    <text name="UserLockedOutMessage">Kullanıcı hesabı kilitlenmiş. Lütfen bir süre sonra tekrar deneyin.</text>
+    <text name="PleaseEnterLoginInformation" value="Lütfen giriş bilgilerinizi girin" />
+    <text name="TenancyName" value="Müşteri adı" />
+    <text name="UserNameOrEmail" value="Kullanıcı adı ya da e-posta" />
+    <text name="Password" value="Şifre" />
+    <text name="ResetPassword" value="Şifreyi yenile" />
+    <text name="UpdatePassword" value="Şifreyi güncelle" />
+    <text name="RememberMe" value="Beni hatırla" />
+    <text name="LogIn" value="Giriş" />
+    <text name="LoginFailed" value="Giriş başarısız!" />
+    <text name="NameSurname" value="Ad soyad" />
+    <text name="UserName" value="Kullanıcı adı" />
+    <text name="Name" value="Ad" />
+    <text name="Surname" value="Soyad" />
+    <text name="EmailAddress" value="E-posta adresi" />
+    <text name="Tenants" value="Müşteriler" />
+    <text name="SavedSuccessfully" value="Başarıyla kaydedildi" />
+    <text name="CreateNewTenant" value="Yeni müşteri oluştur" />
+    <text name="AdminEmailAddress" value="Yönetici e-posta adresi" />
+    <text name="Save" value="Kaydet" />
+    <text name="Cancel" value="İptal" />
+    <text name="TenantName_Regex_Description" value="Müşteri adı en az 2 karakter olmalı, bir harfle başlamalı ve harf, rakam, tire ya da alt çizgi ile devam etmelidir." />
+    <text name="DefaultPasswordIs" value="Varsayılan şifre {0}" />
+    <text name="CanBeEmptyToLoginAsHost" value="Host olarak giriş yapmak için boş bırakılabilir." />
+    <text name="Register" value="Kayıt ol" />
+    <text name="OrLoginWith" value="Ya da şununla giriş yap" />
+    <text name="WaitingForActivationMessage" value="Hesabınız sistem yöneticisi tarafından etkinleştirilmek için bekliyor." />
+    <text name="TenantSelection" value="Müşteri seçimi" />
+    <text name="TenantSelection_Detail" value="Lütfen aşağıdaki müşterilerden birisini seçin." />
+    <text name="Logout" value="Çıkış" />
+    <text name="RegisterFormUserNameInvalidMessage">Lütfen kullanıcı adı alanına e-posta adresi girmeyin.</text>
+    <text name="DatabaseConnectionString" value="Veritabanı bağlantı cümlesi" />
+    <text name="Users" value="Kullanıcılar" />
+    <text name="IsActive" value="Etkin mi" />
+    <text name="FullName" value="Tam adı" />
+    <text name="CreateNewUser" value="Yeni Kullanıcı Oluştur" />
+    <text name="Yes" value="Evet" />
+    <text name="No" value="Hayır" />
+    <text name="Optional" value="Opsiyonel" />
+    <text name="LeaveEmptyToSwitchToHost">Üst kullanıcıya geçiş için boş değer girin.</text>
+    <text name="CurrentTenant">Geçerli müşteri</text>
+    <text name="NotSelected">Seçilmemiş</text>
+    <text name="Change">Değiştir</text>
+    <text name="ChangeTenant">Müşteri değiştir</text>
+    <text name="MultiLevelMenu">Çok Seviyeli Menü</text>
+    <text name="Back">Geri</text>
+    <text name="SuccessfullyRegistered">Başarıyla kayıt olundu</text>
+    <text name="WaitingForEmailActivation">E-posta adresiniz etkinleştirilmeli.</text>
+    <text name="Roles">Roller</text>
+    <text name="DisplayName">Görünen ad</text>
+    <text name="Edit">Düzenle</text>
+    <text name="Delete">Sil</text>
+    <text name="RoleName">Rol adı</text>
+    <text name="Actions">İşlemler</text>
+    <text name="CouldNotCompleteLoginOperation">Giriş işlemi başarısız! Lütfen daha sonra tekrar deneyiniz.</text>
+    <text name="CouldNotValidateExternalUser">Harici kullanıcı doğrulanamadı!</text>
+    <text name="EditRole">Rolü düzenle</text>
+    <text name="EditTenant">Müşteri düzenle</text>
+    <text name="EditUser">Kullanıcı Düzenle</text>
+    <text name="TenantIdIsNotActive{0}">Müşteri id aktif değil: {0}</text>
+    <text name="UnknownTenantId{0}">Müşteri id aktif değil: {0}</text>
+    <text name="ThisFieldIsRequired">Bu alan zorunludur.</text>
+    <text name="PleaseWait">Lütfen bekleyin...</text>
+    <text name="Administration">Yönetim</text>
+    <text name="ClearAll">Hepsini temizle</text>
+    <text name="ClearOthers">Diğerlerini temizle</text>
+    <text name="LabelOptions">Etikent seçenekleri</text>
+    <text name="Permissions">Yetkiler</text>
+    <text name="RoleDescription">Rol tanımı</text>
+    <text name="Refresh">Yenile</text>
+    <text name="Create">Oluştur</text>
+    <text name="UserDetails">Kullanıcı detayları</text>
+    <text name="UserRoles">Kullanıcı rolleri</text>
+    <text name="UserDeleteWarningMessage">{0} kullanıcısı silinecektir.</text>
+    <text name="RoleDeleteWarningMessage">{0} rolü silinecek ve atanmış kullanıcılardan kaldırılacaktır.</text>
+    <text name="TenantDeleteWarningMessage">{0} müşterisi silinecektir.</text>
+    <text name="SearchWithThreeDot">Ara...</text>
+    <text name="PleaseEnterAtLeastNCharacter">Lütfen en az {0} karakter giriniz</text>
+    <text name="PleaseEnterNoMoreThanNCharacter">Lütfen en fazla {0} karakter giriniz</text>
+    <text name="InvalidEmailAddress">Geçersiz e-posta adresi</text>
+    <text name="InvalidPattern">Geçersiz</text>
+    <text name="PairsDoNotMatch">Eşleşmiyor</text>
+    <text name="All">Hepsi</text>
+    <text name="TotalRecordsCount">Toplam: {0}</text>
+    <text name="Search">Bul</text>
+    <text name="Clear">Temizle</text>
+    <text name="CurrentPassword">Mevcut şifreniz</text>
+    <text name="NewPassword">Yeni şifre</text>
+    <text name="ConfirmNewPassword">Yeni şifreyi doğrula</text>
+    <text name="AreYouSureWantToDeleteSelectedAll">Seçili verileri silmek istediğinize emin misiniz?</text>
+    <text name="AreYouSureWantToDelete">{0} verisini silmek istediğinize emin misiniz?</text>
+    <text name="SuccessfullyDeleted">Başarıyla silindi</text>
+  </texts>
+</localizationDictionary>

@@ -1,0 +1,59 @@
+﻿@using CourseManagementSystem.Web.Models.Students
+@using CourseManagementSystem.Models.Addresses
+@model AddStudentAddressFieldViewModel
+
+@{
+    var selectListAddressType = Html.GetEnumSelectList(typeof(AddressType));
+    foreach (var selectOption in selectListAddressType) { selectOption.Text = L("Enum_AddressType_" + selectOption.Value); }
+
+    var selectListCountry = new SelectList(Model.StudentCountryList, "Id", "DisplayName");}
+
+<div class="address-container">
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label">@L("Address")</label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm-down-break align-items-center">
+                <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                        name="addressType" asp-items="@selectListAddressType"
+                        data-hs-select2-options='{
+                                            "minimumResultsForSearch": "Infinity",
+                                            "placeholder": "@L("Pick")"
+                                        }'>
+                </select>
+                <a class="js-delete-field js-delete-field input-group-add-field-delete delete-address" style="opacity: 1" href="javascript:;">
+                    <i class="tio-clear"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="locationDiv">
+        <div class="row form-group">
+            <label for="Student_AddressCountry" class="col-sm-3 col-form-label input-label"></label>
+
+            <div class="col-sm-9">
+                <div class="input-group input-group-sm-down-break align-items-center">
+                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                            name="addressCountry" asp-items="@selectListCountry">
+                        <option value="">@L("PickCountry") </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="cityDiv"></div>
+        <div class="townDiv"></div>
+    </div>
+    <div class="row form-group">
+        <label class="col-sm-3 col-form-label input-label"></label>
+        <div class="col-sm-9">
+            <div class="input-group input-group-sm-down-break align-items-center">
+                <textarea type="text" class="form-control" name="addressDetail" data-address-id=""
+                          placeholder="@L("Address")"
+                          maxlength="@CourseManagementSystem.Models.Addresses.AddressConsts.MaxDetailLength"
+                          minlength="@CourseManagementSystem.Models.Addresses.AddressConsts.MinDetailLength"></textarea>
+            </div>
+        </div>
+    </div>
+    <hr>
+</div>
+<script src="~/view-resources/Views/Students/_AddAddressField.js" asp-append-version="true"></script>

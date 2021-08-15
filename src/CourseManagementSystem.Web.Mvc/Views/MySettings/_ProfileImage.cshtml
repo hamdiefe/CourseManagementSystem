@@ -1,0 +1,59 @@
+﻿@using CourseManagementSystem.Services.MySettings.Dtos
+@model ProfileImageDto
+ <!-- Card -->
+<div class="card mb-3 mb-lg-5">
+    <form id="ProfileImageForm">
+        <!-- Profile Cover -->
+        <div class="profile-cover">
+            <div class="profile-cover-img-wrapper">
+                <img id="profileCoverImg" class="profile-cover-img" src="~/img/profile-bg.jpg">
+
+                <!-- Custom File Cover -->
+                <div class="profile-cover-content profile-cover-btn">
+                    <div class="custom-file-btn">
+                        <input type="file" class="js-file-attach custom-file-btn-input" id="profileCoverUplaoder">
+                        <button type="submit" class="btn btn-primary" name="profileImage">
+                            <span class="d-none d-sm-inline-block">@L("SaveProfileImage")</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- End Custom File Cover -->
+            </div>
+        </div>
+        <!-- End Profile Cover -->
+        <!-- Avatar -->
+        <label class="avatar avatar-xxl avatar-circle avatar-border-lg avatar-uploader profile-cover-avatar" for="avatarUploader">
+            @if (Model.ProfileImage == null || Model.ProfileImage == "")
+            {
+                <img id="avatarImg" class="avatar-img" src="~/front-admin/assets/svg/logos/logo-short.svg" alt="@Model.ProfileImage">
+            }
+            else
+            {
+                <img id="avatarImg" class="avatar-img" src="/img/profile-img/@Model.ProfileImage" alt="@Model.ProfileImage">
+            }
+            <input type="hidden" value="@Model.ProfileImage" id="ProfileImageInput" name="profileImageUrl" />
+
+            <input type="file" class="js-file-attach avatar-uploader-input" id="avatarUploader"
+                   data-hs-file-attach-options='{
+                          "textTarget": "#avatarImg",
+                          "mode": "image",
+                          "targetAttr": "src",
+                          "allowTypes": [".png", ".jpeg", ".jpg"]
+                       }'>
+
+            <span class="avatar-uploader-trigger">
+                <i class="tio-edit avatar-uploader-icon shadow-soft"></i>
+            </span>
+        </label>
+        <!-- End Avatar -->
+    </form>
+    <!-- Body -->
+    <div class="card-body">
+        <div class="row">
+
+        </div>
+        <!-- End Row -->
+    </div>
+    <!-- End Body -->
+</div>
+<!-- End Card -->

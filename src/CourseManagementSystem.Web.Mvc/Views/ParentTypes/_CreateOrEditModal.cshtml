@@ -1,0 +1,48 @@
+﻿@using CourseManagementSystem.Web.Models.ParentTypes
+@using CourseManagementSystem.Web.Models.Common.Modals
+@using CourseManagementSystem.Models.ParentTypes
+@model CreateOrEditParentTypeModalViewModel
+
+@{ 
+    var selectListParentDegree = Html.GetEnumSelectList(typeof(ParentDegree));
+    foreach (var selectOption in selectListParentDegree) { selectOption.Text = L("Enum_ParentDegree_" + selectOption.Value); }
+}
+@await Html.PartialAsync("~/Views/Shared/Modals/_ModalHeader.cshtml", new ModalHeaderViewModel(Model.IsEditMode ? (L("EditParentType")) : L("CreateNewParentType")))
+
+<div class="modal-body">
+    <form name="ParentTypeInformationsForm">
+        @if (Model.IsEditMode)
+        {
+    <input type="hidden" name="id" value="@Model.ParentType.Id" />}
+        <div class="row form-group">
+            <label for="ParentType_Name" class="col-sm-3 col-form-label input-label">@L("Name")</label>
+
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <input type="text" class="form-control" name="name" id="ParentType_Name"
+                           value="@Model.ParentType.Name"
+                           maxlength="@CourseManagementSystem.Models.ParentTypes.ParentTypeConsts.MaxNameLength" minlength="@CourseManagementSystem.Models.ParentTypes.ParentTypeConsts.MinNameLength"
+                           required>
+                </div>
+            </div>
+        </div>
+
+        <div class="row form-group">
+            <label for="ParentType_Degree" class="col-sm-3 col-form-label input-label">@L("ParentDegree")</label>
+            <div class="col-sm-9">
+                <div class="js-form-message input-group input-group-sm-down-break">
+                    <select class="js-select2-custom custom-select" size="1" style="opacity: 0;"
+                            id="ParentType_Degree" name="degree" asp-for="@Model.ParentType.Degree" asp-items="@selectListParentDegree"
+                            data-hs-select2-options='{
+                            "minimumResultsForSearch": "Infinity",
+                            "placeholder": "@L("Pick")"
+                          }'>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        @await Html.PartialAsync("~/Views/Shared/Modals/_ModalFooterWithSaveAndCancel.cshtml")
+    </form>
+</div>
+<script src="~/view-resources/Views/ParentTypes/_CreateOrEditModal.js" asp-append-version="true"></script>
